@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  statsVC.swift
 //  BudgetBoss
 //
 //  Created by Adolfo Frias on 8/10/18.
@@ -8,18 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class statsVC: UIViewController {
+  
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+   
 
 }
 

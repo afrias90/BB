@@ -8,22 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		18188CEE211E327300DE8DB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18188CED211E327300DE8DB5 /* AppDelegate.swift */; };
-		18188CF0211E327300DE8DB5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18188CEF211E327300DE8DB5 /* ViewController.swift */; };
+		18188CF0211E327300DE8DB5 /* statsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18188CEF211E327300DE8DB5 /* statsVC.swift */; };
 		18188CF3211E327300DE8DB5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18188CF1211E327300DE8DB5 /* Main.storyboard */; };
 		18188CF6211E327300DE8DB5 /* BudgetBoss.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 18188CF4211E327300DE8DB5 /* BudgetBoss.xcdatamodeld */; };
 		18188CF8211E327400DE8DB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18188CF7211E327400DE8DB5 /* Assets.xcassets */; };
 		18188CFB211E327400DE8DB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18188CF9211E327400DE8DB5 /* LaunchScreen.storyboard */; };
+		18188D0A211FA65100DE8DB5 /* BBGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18188D09211FA65100DE8DB5 /* BBGradientView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		18188CEA211E327300DE8DB5 /* BudgetBoss.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BudgetBoss.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18188CED211E327300DE8DB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		18188CEF211E327300DE8DB5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		18188CEF211E327300DE8DB5 /* statsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = statsVC.swift; sourceTree = "<group>"; };
 		18188CF2211E327300DE8DB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		18188CF5211E327300DE8DB5 /* BudgetBoss.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BudgetBoss.xcdatamodel; sourceTree = "<group>"; };
 		18188CF7211E327400DE8DB5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18188CFA211E327400DE8DB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18188CFC211E327400DE8DB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18188D09211FA65100DE8DB5 /* BBGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBGradientView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +58,9 @@
 		18188CEC211E327300DE8DB5 /* BudgetBoss */ = {
 			isa = PBXGroup;
 			children = (
+				18188D06211FA5F200DE8DB5 /* Views */,
+				18188D02211E338500DE8DB5 /* Controllers */,
 				18188CED211E327300DE8DB5 /* AppDelegate.swift */,
-				18188CEF211E327300DE8DB5 /* ViewController.swift */,
 				18188CF1211E327300DE8DB5 /* Main.storyboard */,
 				18188CF7211E327400DE8DB5 /* Assets.xcassets */,
 				18188CF9211E327400DE8DB5 /* LaunchScreen.storyboard */,
@@ -65,6 +68,22 @@
 				18188CF4211E327300DE8DB5 /* BudgetBoss.xcdatamodeld */,
 			);
 			path = BudgetBoss;
+			sourceTree = "<group>";
+		};
+		18188D02211E338500DE8DB5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				18188CEF211E327300DE8DB5 /* statsVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		18188D06211FA5F200DE8DB5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				18188D09211FA65100DE8DB5 /* BBGradientView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,6 +96,7 @@
 				18188CE6211E327300DE8DB5 /* Sources */,
 				18188CE7211E327300DE8DB5 /* Frameworks */,
 				18188CE8211E327300DE8DB5 /* Resources */,
+				18188D03211E803000DE8DB5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -133,13 +153,30 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		18188D03211E803000DE8DB5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		18188CE6211E327300DE8DB5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				18188CF6211E327300DE8DB5 /* BudgetBoss.xcdatamodeld in Sources */,
-				18188CF0211E327300DE8DB5 /* ViewController.swift in Sources */,
+				18188CF0211E327300DE8DB5 /* statsVC.swift in Sources */,
+				18188D0A211FA65100DE8DB5 /* BBGradientView.swift in Sources */,
 				18188CEE211E327300DE8DB5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
