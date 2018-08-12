@@ -23,11 +23,11 @@ class StatsView: UIView {
         }
     }
     
-    @IBInspectable var bgColor: CGColor = #colorLiteral(red: 0.5463244319, green: 0.6703535914, blue: 0.5557230115, alpha: 1) {
-        didSet {
-            self.layer.backgroundColor = bgColor
-        }
-    }
+//    @IBInspectable var bgColor: CGColor = #colorLiteral(red: 0.5463244319, green: 0.6703535914, blue: 0.5557230115, alpha: 1) {
+//        didSet {
+//            self.layer.backgroundColor = bgColor
+//        }
+//    }
 //    @IBInspectable var topColor: UIColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1) {
 //        didSet {
 //            self.setNeedsLayout()
@@ -51,7 +51,7 @@ class StatsView: UIView {
     func setupView() {
         self.layer.cornerRadius = cornerRadius
         self.layer.borderWidth = borderWidth
-        self.layer.backgroundColor = bgColor
+        //self.layer.backgroundColor = bgColor
     }
     
 //    override func layoutSubviews() {
