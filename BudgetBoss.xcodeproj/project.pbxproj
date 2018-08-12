@@ -14,6 +14,8 @@
 		18188CF8211E327400DE8DB5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18188CF7211E327400DE8DB5 /* Assets.xcassets */; };
 		18188CFB211E327400DE8DB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18188CF9211E327400DE8DB5 /* LaunchScreen.storyboard */; };
 		18188D0A211FA65100DE8DB5 /* BBGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18188D09211FA65100DE8DB5 /* BBGradientView.swift */; };
+		18188D0C211FAB4C00DE8DB5 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18188D0B211FAB4C00DE8DB5 /* CircleImage.swift */; };
+		18188D0E211FAE8000DE8DB5 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18188D0D211FAE8000DE8DB5 /* StatsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		18188CFA211E327400DE8DB5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18188CFC211E327400DE8DB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18188D09211FA65100DE8DB5 /* BBGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBGradientView.swift; sourceTree = "<group>"; };
+		18188D0B211FAB4C00DE8DB5 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
+		18188D0D211FAE8000DE8DB5 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				18188D09211FA65100DE8DB5 /* BBGradientView.swift */,
+				18188D0B211FAB4C00DE8DB5 /* CircleImage.swift */,
+				18188D0D211FAE8000DE8DB5 /* StatsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -176,8 +182,10 @@
 			files = (
 				18188CF6211E327300DE8DB5 /* BudgetBoss.xcdatamodeld in Sources */,
 				18188CF0211E327300DE8DB5 /* statsVC.swift in Sources */,
+				18188D0E211FAE8000DE8DB5 /* StatsView.swift in Sources */,
 				18188D0A211FA65100DE8DB5 /* BBGradientView.swift in Sources */,
 				18188CEE211E327300DE8DB5 /* AppDelegate.swift in Sources */,
+				18188D0C211FAB4C00DE8DB5 /* CircleImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
