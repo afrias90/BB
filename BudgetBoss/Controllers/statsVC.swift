@@ -7,23 +7,101 @@
 //
 
 import UIKit
+import CoreData
 
 class statsVC: UIViewController {
-  
+    
+    var character: Character?
+    
+    @IBOutlet weak var nameLbl: UILabel!
+    @IBOutlet weak var playerClassLbl: UILabel!
+    
+    @IBOutlet weak var staminaAmt: UILabel!
     @IBOutlet weak var powerAmt: UILabel!
     @IBOutlet weak var magicAmt: UILabel!
     @IBOutlet weak var afflictionAmt: UILabel!
     
-   
+    @IBOutlet weak var attackLabel: UILabel!
+    @IBOutlet weak var defenseLabel: UILabel!
     
+    //Budget Progress bars
+    @IBOutlet weak var attProgressView: UIView!
+    @IBOutlet weak var attProgressContraint: NSLayoutConstraint!
+    @IBOutlet weak var defProgressView: UIView!
+    @IBOutlet weak var defProgressContraint: NSLayoutConstraint!
     
+    @IBOutlet weak var upgradesAmt: UILabel!
+    @IBOutlet weak var cleanseAmt: UILabel!
+    @IBOutlet weak var sicknessAmt: UILabel!
+    @IBOutlet weak var energyAmt: UILabel!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+       
+        
+        
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if character == nil {
+            fetchPlayer()
+        }
+    }
+    
+    @IBAction func staminaPressed(_ sender: Any) {
+        let staminaView = StaminaVC()
+        staminaView.modalPresentationStyle = .custom
+        present(staminaView, animated: true, completion: nil)
+    }
+    
+    @IBAction func attackPressed(_ sender: Any) {
+    }
+    
+    @IBAction func defensePressed(_ sender: Any) {
+    }
+    
+    func fetchPlayer() {
+        do {
+            let results = try context.fetch(Character.fetchRequest()) as [Character]
+            if results.count > 0 {
+                print(results.first?.name as Any)
+                character = results.first
+                setupPlayer(player: character!)
+            } else {
+                print("No characters found")
+                performSegue(withIdentifier: "createCharacter", sender: nil)
+            }
+            
+        } catch {
+            let error = error as NSError
+            print(error)
+        }
+    
+    }
+    
+    func setupPlayer(player: Character) {
+        nameLbl.text = player.name
+        staminaAmt.text = String(format: "%0.2f", player.stamina)
+        
+        //remove after default values added to player
+        let zero = "0.00"
+        powerAmt.text = zero
+        magicAmt.text = zero
+        afflictionAmt.text = zero
+        attackLabel.text = "\(zero)/ \(player.stamina / 2)"
+        defenseLabel.text = "\(zero)/ \(zero)"
+    
+        attProgressContraint.constant = 0
+        defProgressContraint.constant = 0
+        
+        upgradesAmt.text = zero
+        cleanseAmt.text = zero
+        sicknessAmt.text = zero
+        energyAmt.text = zero
+        
+        //set up notification for progress bar?
+    }
+    
     
     
     

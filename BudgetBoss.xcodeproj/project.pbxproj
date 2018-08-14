@@ -16,6 +16,11 @@
 		18188D0A211FA65100DE8DB5 /* BBGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18188D09211FA65100DE8DB5 /* BBGradientView.swift */; };
 		18188D0C211FAB4C00DE8DB5 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18188D0B211FAB4C00DE8DB5 /* CircleImage.swift */; };
 		18188D0E211FAE8000DE8DB5 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18188D0D211FAE8000DE8DB5 /* StatsView.swift */; };
+		1848F14721224F200087B184 /* CreateCharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1848F14621224F200087B184 /* CreateCharacterVC.swift */; };
+		1848F14A21225E050087B184 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1848F14921225E050087B184 /* Constants.swift */; };
+		1860694A2120CF0100E676C3 /* BudgetCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186069492120CF0100E676C3 /* BudgetCalculation.swift */; };
+		1860694D2120F11C00E676C3 /* StaminaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1860694B2120F11C00E676C3 /* StaminaVC.swift */; };
+		1860694E2120F11C00E676C3 /* StaminaVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1860694C2120F11C00E676C3 /* StaminaVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +35,11 @@
 		18188D09211FA65100DE8DB5 /* BBGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBGradientView.swift; sourceTree = "<group>"; };
 		18188D0B211FAB4C00DE8DB5 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		18188D0D211FAE8000DE8DB5 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		1848F14621224F200087B184 /* CreateCharacterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCharacterVC.swift; sourceTree = "<group>"; };
+		1848F14921225E050087B184 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		186069492120CF0100E676C3 /* BudgetCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCalculation.swift; sourceTree = "<group>"; };
+		1860694B2120F11C00E676C3 /* StaminaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaminaVC.swift; sourceTree = "<group>"; };
+		1860694C2120F11C00E676C3 /* StaminaVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StaminaVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +72,9 @@
 		18188CEC211E327300DE8DB5 /* BudgetBoss */ = {
 			isa = PBXGroup;
 			children = (
+				1848F14821225DFB0087B184 /* Utilities */,
+				1860694F2120F12600E676C3 /* Xibs */,
+				186069482120CECE00E676C3 /* Models */,
 				18188D06211FA5F200DE8DB5 /* Views */,
 				18188D02211E338500DE8DB5 /* Controllers */,
 				18188CED211E327300DE8DB5 /* AppDelegate.swift */,
@@ -78,6 +91,8 @@
 			isa = PBXGroup;
 			children = (
 				18188CEF211E327300DE8DB5 /* statsVC.swift */,
+				1860694B2120F11C00E676C3 /* StaminaVC.swift */,
+				1848F14621224F200087B184 /* CreateCharacterVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -90,6 +105,30 @@
 				18188D0D211FAE8000DE8DB5 /* StatsView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		1848F14821225DFB0087B184 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				1848F14921225E050087B184 /* Constants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		186069482120CECE00E676C3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				186069492120CF0100E676C3 /* BudgetCalculation.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1860694F2120F12600E676C3 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				1860694C2120F11C00E676C3 /* StaminaVC.xib */,
+			);
+			path = Xibs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +190,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1860694E2120F11C00E676C3 /* StaminaVC.xib in Resources */,
 				18188CFB211E327400DE8DB5 /* LaunchScreen.storyboard in Resources */,
 				18188CF8211E327400DE8DB5 /* Assets.xcassets in Resources */,
 				18188CF3211E327300DE8DB5 /* Main.storyboard in Resources */,
@@ -180,9 +220,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1860694D2120F11C00E676C3 /* StaminaVC.swift in Sources */,
 				18188CF6211E327300DE8DB5 /* BudgetBoss.xcdatamodeld in Sources */,
 				18188CF0211E327300DE8DB5 /* statsVC.swift in Sources */,
 				18188D0E211FAE8000DE8DB5 /* StatsView.swift in Sources */,
+				1848F14721224F200087B184 /* CreateCharacterVC.swift in Sources */,
+				1848F14A21225E050087B184 /* Constants.swift in Sources */,
+				1860694A2120CF0100E676C3 /* BudgetCalculation.swift in Sources */,
 				18188D0A211FA65100DE8DB5 /* BBGradientView.swift in Sources */,
 				18188CEE211E327300DE8DB5 /* AppDelegate.swift in Sources */,
 				18188D0C211FAB4C00DE8DB5 /* CircleImage.swift in Sources */,
