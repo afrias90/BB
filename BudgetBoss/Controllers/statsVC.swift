@@ -35,6 +35,14 @@ class statsVC: UIViewController {
     @IBOutlet weak var sicknessAmt: UILabel!
     @IBOutlet weak var energyAmt: UILabel!
     
+    // calculated values
+    var power = 0.0
+    var magic = 0.0
+    var affliction = 0.0
+    var spendingAttack = 0.0
+    var spendingDefense = 0.0
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -64,9 +72,10 @@ class statsVC: UIViewController {
         do {
             let results = try context.fetch(Character.fetchRequest()) as [Character]
             if results.count > 0 {
-                print(results.first?.name as Any)
+                
                 character = results.first
-                setupPlayer(player: character!)
+                setupPlayer(character: character!)
+                //print(character?.attack, character?.defense, character?.affliction, character?.name)
             } else {
                 print("No characters found")
                 performSegue(withIdentifier: "createCharacter", sender: nil)
@@ -79,25 +88,23 @@ class statsVC: UIViewController {
     
     }
     
-    func setupPlayer(player: Character) {
-        nameLbl.text = player.name
-        staminaAmt.text = String(format: "%0.2f", player.stamina)
+    func setupPlayer(character: Character) {
+        nameLbl.text = character.name
+        staminaAmt.text = String(format: "%0.2f", character.stamina)
         
-        //remove after default values added to player
-        let zero = "0.00"
-        powerAmt.text = zero
-        magicAmt.text = zero
-        afflictionAmt.text = zero
-        attackLabel.text = "\(zero)/ \(player.stamina / 2)"
-        defenseLabel.text = "\(zero)/ \(zero)"
+//        powerAmt.text =
+//        magicAmt.text =
+//        afflictionAmt.text =
+        
+        let attack = String(format: "%0.2f", character.attack)
+        let defense = String(format: "%0.2f", character.defense)
+        
+        attackLabel.text = "\(0)/ \(attack)"
+        defenseLabel.text = "\(0)/ \(defense)"
     
         attProgressContraint.constant = 0
         defProgressContraint.constant = 0
         
-        upgradesAmt.text = zero
-        cleanseAmt.text = zero
-        sicknessAmt.text = zero
-        energyAmt.text = zero
         
         //set up notification for progress bar?
     }

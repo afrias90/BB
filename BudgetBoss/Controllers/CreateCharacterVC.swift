@@ -35,8 +35,8 @@ class CreateCharacterVC: UIViewController, UITextFieldDelegate {
         guard let name = nameTxt.text, name != "" else {return}
         
         if paycheckTxt.text != "", nameTxt.text != "" {
-            spinner.isHidden = false
-            spinner.startAnimating()
+//            spinner.isHidden = false
+//            spinner.startAnimating()
             let stamina = Double(paycheckTxt.text!)!
             
             createUser(name: name, stamina: stamina) { (success) in
@@ -46,8 +46,8 @@ class CreateCharacterVC: UIViewController, UITextFieldDelegate {
                     print("failed to create user and did not dismiss")
                     
                 }
-                self.spinner.isHidden = true
-                self.spinner.stopAnimating()
+//                self.spinner.isHidden = true
+//                self.spinner.stopAnimating()
             }
         } else {
             print("paycheck or name missing")
@@ -59,10 +59,17 @@ class CreateCharacterVC: UIViewController, UITextFieldDelegate {
         let character = Character(context: context)
         character.name = name
         character.stamina = stamina
+        character.category = "Cursed Warrior"
         
-        //implement default values of zero?
+        let mainItem = Item(context: context)
+        mainItem.main = true
+        mainItem.name = "Sword Of Hope"
+        mainItem.category = "asset"
+        character.addToToItem(mainItem)
+        
         
         print("\(character.name, character.stamina)")
+        print("\(mainItem.name, mainItem.category)")
         ad.saveContext()
         completion(true)
         

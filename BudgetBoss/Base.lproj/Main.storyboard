@@ -124,7 +124,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="im5-da-yeb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-804.375" y="2030"/>
+            <point key="canvasLocation" x="-612" y="1576"/>
         </scene>
         <!--Budget Boss-->
         <scene sceneID="tne-QT-ifu">
@@ -483,13 +483,14 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="eUe-8u-qeU">
                                                                         <rect key="frame" x="0.0" y="0.0" width="115" height="30"/>
                                                                         <subviews>
-                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Upgrades" translatesAutoresizingMaskIntoConstraints="NO" id="6C8-bX-k7B">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zeq-9C-lBK">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="height" constant="30" id="gQ2-Jm-OPo"/>
-                                                                                    <constraint firstAttribute="width" constant="30" id="lfe-95-xGP"/>
+                                                                                    <constraint firstAttribute="width" constant="30" id="0XM-HW-Vat"/>
+                                                                                    <constraint firstAttribute="height" constant="30" id="3YH-4n-qJF"/>
                                                                                 </constraints>
-                                                                            </imageView>
+                                                                                <state key="normal" image="Upgrades"/>
+                                                                            </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upgrades" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="M6T-sp-BTY">
                                                                                 <rect key="frame" x="35" y="0.0" width="80" height="30"/>
                                                                                 <constraints>
@@ -518,13 +519,14 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ORd-nb-ETz">
                                                                         <rect key="frame" x="0.0" y="0.0" width="115" height="30"/>
                                                                         <subviews>
-                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cleanse" translatesAutoresizingMaskIntoConstraints="NO" id="EL7-rW-fVD">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ev7-Jz-U30">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="width" constant="30" id="53T-Wh-BGy"/>
-                                                                                    <constraint firstAttribute="height" constant="30" id="Let-Y1-L7Q"/>
+                                                                                    <constraint firstAttribute="height" constant="30" id="RJx-Sr-YDN"/>
+                                                                                    <constraint firstAttribute="width" constant="30" id="eBd-MQ-sjc"/>
                                                                                 </constraints>
-                                                                            </imageView>
+                                                                                <state key="normal" image="Cleanse"/>
+                                                                            </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cleanse" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="dnB-Rz-n7F">
                                                                                 <rect key="frame" x="35" y="0.0" width="80" height="30"/>
                                                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
@@ -550,13 +552,14 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="N7x-hO-Dn7">
                                                                         <rect key="frame" x="0.0" y="0.0" width="115" height="30"/>
                                                                         <subviews>
-                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sickness" translatesAutoresizingMaskIntoConstraints="NO" id="Qoo-m6-p13">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OYw-yV-1iT">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="height" constant="30" id="W5I-yx-9lG"/>
-                                                                                    <constraint firstAttribute="width" constant="30" id="leB-Vx-gpT"/>
+                                                                                    <constraint firstAttribute="width" constant="30" id="Jj6-CP-Mvt"/>
+                                                                                    <constraint firstAttribute="height" constant="30" id="ccD-qg-wqJ"/>
                                                                                 </constraints>
-                                                                            </imageView>
+                                                                                <state key="normal" image="sickness"/>
+                                                                            </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sickness" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="YDc-wu-ZIS">
                                                                                 <rect key="frame" x="35" y="0.0" width="80" height="30"/>
                                                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
@@ -582,13 +585,14 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="EWR-le-ISP">
                                                                         <rect key="frame" x="0.0" y="0.0" width="115" height="30"/>
                                                                         <subviews>
-                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Energy" translatesAutoresizingMaskIntoConstraints="NO" id="4pf-RD-Dhg">
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oZg-K5-yvG">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                                 <constraints>
-                                                                                    <constraint firstAttribute="height" constant="30" id="Ocw-rl-qnp"/>
-                                                                                    <constraint firstAttribute="width" constant="30" id="f4l-xW-NIA"/>
+                                                                                    <constraint firstAttribute="width" constant="30" id="jOj-R0-FhG"/>
+                                                                                    <constraint firstAttribute="height" constant="30" id="rtl-YW-xKh"/>
                                                                                 </constraints>
-                                                                            </imageView>
+                                                                                <state key="normal" image="Energy"/>
+                                                                            </button>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Energy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="qQd-ky-cFT">
                                                                                 <rect key="frame" x="35" y="0.0" width="80" height="30"/>
                                                                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
@@ -784,7 +788,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Budget Boss" id="X8s-ap-ivN"/>
+                    <navigationItem key="navigationItem" title="Budget Boss" id="X8s-ap-ivN">
+                        <barButtonItem key="backBarButtonItem" title="Close Bag" id="Wq0-vm-DnL"/>
+                        <barButtonItem key="rightBarButtonItem" title="Bag" id="hnC-EU-ZJJ">
+                            <color key="tintColor" red="0.57095387620000004" green="0.66666668650000005" blue="0.56494504400000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <segue destination="nxc-Vi-N8e" kind="show" id="7PK-em-0Ub"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="afflictionAmt" destination="r1f-bE-vg4" id="aMq-A5-2Gf"/>
                         <outlet property="attProgressContraint" destination="dBU-Zo-elW" id="rEp-5N-hXn"/>
@@ -807,7 +819,38 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="133.125" y="2031.25"/>
+            <point key="canvasLocation" x="137" y="1576"/>
+        </scene>
+        <!--Items-->
+        <scene sceneID="brT-bM-yIG">
+            <objects>
+                <viewController id="nxc-Vi-N8e" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YG3-Zo-gpL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="d7x-qY-h1z">
+                                <rect key="frame" x="0.0" y="64" width="375" height="432"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ABw-8y-gcO">
+                                <rect key="frame" x="121" y="539" width="133" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="25"/>
+                                <state key="normal" title="New Item">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Xrq-nM-iA7"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Items" id="ciK-Yj-LHf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xvz-oC-vo0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="890.39999999999998" y="1569.265367316342"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="QHD-Bf-ROQ">
@@ -821,11 +864,28 @@
                     </tabBar>
                     <connections>
                         <segue destination="bi4-Ge-h06" kind="relationship" relationship="viewControllers" id="7bF-aV-tFd"/>
+                        <segue destination="Agt-8S-Ewh" kind="relationship" relationship="viewControllers" id="Ux5-fx-xvr"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7LL-Ua-QtX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="5eb-SO-VFE">
+            <objects>
+                <viewController id="k93-wa-DKX" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ffo-iu-kpE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="6Vj-Za-EIy"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="xOl-Bu-qVd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0E8-hQ-nLL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="918" y="880"/>
         </scene>
         <!--Stats-->
         <scene sceneID="NRG-YS-lcA">
@@ -845,6 +905,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eij-wx-EGN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="880.20989505247383"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="DyI-MN-HDn">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Agt-8S-Ewh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" id="jhq-eD-lqY"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="J7x-ki-3mr">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="k93-wa-DKX" kind="relationship" relationship="rootViewController" id="MmK-Ei-kGe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1UJ-0F-ors" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="918" y="134"/>
         </scene>
     </scenes>
     <resources>
