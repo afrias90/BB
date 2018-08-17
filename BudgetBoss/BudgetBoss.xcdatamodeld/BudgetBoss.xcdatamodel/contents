@@ -6,8 +6,8 @@
         <attribute name="defense" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="stamina" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="toItem" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Item" inverseName="toCharacter" inverseEntity="Item" syncable="YES"/>
-        <relationship name="toLog" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Log" inverseName="toCharacter" inverseEntity="Log" syncable="YES"/>
+        <relationship name="item" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Item" inverseName="toCharacter" inverseEntity="Item" syncable="YES"/>
+        <relationship name="log" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Log" inverseName="toCharacter" inverseEntity="Log" syncable="YES"/>
     </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="actualName" optional="YES" attributeType="String" syncable="YES"/>
@@ -17,7 +17,7 @@
         <attribute name="main" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="toCharacter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Character" inverseName="toItem" inverseEntity="Character" syncable="YES"/>
+        <relationship name="toCharacter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Character" inverseName="item" inverseEntity="Character" syncable="YES"/>
     </entity>
     <entity name="Log" representedClassName="Log" syncable="YES" codeGenerationType="class">
         <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
@@ -30,7 +30,7 @@
         <attribute name="power" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="targetName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="targetNewPower" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="toCharacter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Character" inverseName="toLog" inverseEntity="Character" syncable="YES"/>
+        <relationship name="toCharacter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Character" inverseName="log" inverseEntity="Character" syncable="YES"/>
     </entity>
     <entity name="Merchant" representedClassName="Merchant" syncable="YES" codeGenerationType="class">
         <attribute name="actualName" optional="YES" attributeType="String" syncable="YES"/>
@@ -39,7 +39,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Character" positionX="2088" positionY="-1017" width="128" height="148"/>
+        <element name="Character" positionX="2088" positionY="-1017" width="128" height="150"/>
         <element name="Item" positionX="1890" positionY="-1026" width="128" height="163"/>
         <element name="Log" positionX="2286" positionY="-1008" width="128" height="210"/>
         <element name="Merchant" positionX="2097" positionY="-1161" width="128" height="105"/>

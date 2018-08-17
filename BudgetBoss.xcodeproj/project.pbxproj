@@ -21,6 +21,9 @@
 		1860694A2120CF0100E676C3 /* BudgetCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186069492120CF0100E676C3 /* BudgetCalculation.swift */; };
 		1860694D2120F11C00E676C3 /* StaminaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1860694B2120F11C00E676C3 /* StaminaVC.swift */; };
 		1860694E2120F11C00E676C3 /* StaminaVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1860694C2120F11C00E676C3 /* StaminaVC.xib */; };
+		1884457F212510A8002E0932 /* ItemsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1884457E212510A8002E0932 /* ItemsVC.swift */; };
+		188445812125176C002E0932 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188445802125176C002E0932 /* ItemCell.swift */; };
+		18A7189821265A67000B8DD3 /* EditItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7189721265A67000B8DD3 /* EditItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		186069492120CF0100E676C3 /* BudgetCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCalculation.swift; sourceTree = "<group>"; };
 		1860694B2120F11C00E676C3 /* StaminaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaminaVC.swift; sourceTree = "<group>"; };
 		1860694C2120F11C00E676C3 /* StaminaVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StaminaVC.xib; sourceTree = "<group>"; };
+		1884457E212510A8002E0932 /* ItemsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsVC.swift; sourceTree = "<group>"; };
+		188445802125176C002E0932 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		18A7189721265A67000B8DD3 /* EditItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +99,8 @@
 				18188CEF211E327300DE8DB5 /* statsVC.swift */,
 				1860694B2120F11C00E676C3 /* StaminaVC.swift */,
 				1848F14621224F200087B184 /* CreateCharacterVC.swift */,
+				1884457E212510A8002E0932 /* ItemsVC.swift */,
+				18A7189721265A67000B8DD3 /* EditItem.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -103,6 +111,7 @@
 				18188D09211FA65100DE8DB5 /* BBGradientView.swift */,
 				18188D0B211FAB4C00DE8DB5 /* CircleImage.swift */,
 				18188D0D211FAE8000DE8DB5 /* StatsView.swift */,
+				188445802125176C002E0932 /* ItemCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -222,11 +231,14 @@
 			files = (
 				1860694D2120F11C00E676C3 /* StaminaVC.swift in Sources */,
 				18188CF6211E327300DE8DB5 /* BudgetBoss.xcdatamodeld in Sources */,
+				1884457F212510A8002E0932 /* ItemsVC.swift in Sources */,
+				18A7189821265A67000B8DD3 /* EditItem.swift in Sources */,
 				18188CF0211E327300DE8DB5 /* statsVC.swift in Sources */,
 				18188D0E211FAE8000DE8DB5 /* StatsView.swift in Sources */,
 				1848F14721224F200087B184 /* CreateCharacterVC.swift in Sources */,
 				1848F14A21225E050087B184 /* Constants.swift in Sources */,
 				1860694A2120CF0100E676C3 /* BudgetCalculation.swift in Sources */,
+				188445812125176C002E0932 /* ItemCell.swift in Sources */,
 				18188D0A211FA65100DE8DB5 /* BBGradientView.swift in Sources */,
 				18188CEE211E327300DE8DB5 /* AppDelegate.swift in Sources */,
 				18188D0C211FAB4C00DE8DB5 /* CircleImage.swift in Sources */,

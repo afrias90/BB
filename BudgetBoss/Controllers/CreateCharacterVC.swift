@@ -32,9 +32,9 @@ class CreateCharacterVC: UIViewController, UITextFieldDelegate {
    
     @IBAction func createPressed(_ sender: Any) {
         
-        guard let name = nameTxt.text, name != "" else {return}
+        //guard let name = nameTxt.text, name != "" else {return}
         
-        if paycheckTxt.text != "", nameTxt.text != "" {
+        if paycheckTxt.text != "", nameTxt.text != "", let name = nameTxt.text {
 //            spinner.isHidden = false
 //            spinner.startAnimating()
             let stamina = Double(paycheckTxt.text!)!
@@ -65,7 +65,7 @@ class CreateCharacterVC: UIViewController, UITextFieldDelegate {
         mainItem.main = true
         mainItem.name = "Sword Of Hope"
         mainItem.category = "asset"
-        character.addToToItem(mainItem)
+        character.addToItem(mainItem)
         
         
         print("\(character.name, character.stamina)")
@@ -99,7 +99,13 @@ class CreateCharacterVC: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     
-    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        if let text = Double(paycheckTxt.text!) {
+            paycheckTxt.text = String(format: "%0.2f", text)
+        } else {
+            paycheckTxt.text = ""
+        }
+    }
 
   
     

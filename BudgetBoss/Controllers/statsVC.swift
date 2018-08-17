@@ -91,8 +91,7 @@ class statsVC: UIViewController {
     func setupPlayer(character: Character) {
         nameLbl.text = character.name
         staminaAmt.text = String(format: "%0.2f", character.stamina)
-        
-//        powerAmt.text =
+
 //        magicAmt.text =
 //        afflictionAmt.text =
         
