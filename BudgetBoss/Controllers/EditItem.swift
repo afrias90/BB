@@ -7,144 +7,304 @@
 //
 
 import UIKit
+import CoreData
 
-class EditItem: UIViewController {
+class EditItem: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
     
-    var category = ""
+    //variables
+    var itemToEdit: Item?
+    var category = "asset"
+    var lastTextField: UITextField?
+    var player: Character?
     
-    @IBOutlet weak var assetHeight: NSLayoutConstraint!
-    @IBOutlet weak var assetStackView: UIStackView!
     
-    @IBOutlet weak var creditHeight: NSLayoutConstraint!
-    @IBOutlet weak var creditStackView: UIStackView!
+    //constraints
+    @IBOutlet weak var stackViewLeading: NSLayoutConstraint!
+    @IBOutlet weak var statsViewWidth: NSLayoutConstraint!
     
-    @IBOutlet weak var afflictionHeight: NSLayoutConstraint!
-    @IBOutlet weak var afflictionStackview: UIStackView!
+    @IBOutlet weak var stackView: UIStackView!
     
+    //outlets
     @IBOutlet weak var powerBtn: UIButton!
     @IBOutlet weak var magicBtn: UIButton!
     @IBOutlet weak var afflictionBtn: UIButton!
     
+    @IBOutlet weak var nameTxtField: UITextField!
+    @IBOutlet weak var realNameTxtField: UITextField!
+    
+    @IBOutlet weak var assetValueTxtField: UITextField!
+    
+    @IBOutlet weak var durabilityTxtField: UITextField!
+    @IBOutlet weak var creditValueTxtField: UITextField!
+    
+    @IBOutlet weak var debtValueTxtField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        statsViewWidth.constant = view.frame.width - 20
+        
+        if itemToEdit != nil {
+            loadItem()
+        }
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(EditItem.handleTap))
+        view.addGestureRecognizer(tap)
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        reset()
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        //so this huge stage view doesnt appear during transitions
+        stackView.isHidden = false
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        //will this hide the stackview from the itemVC?
+        stackView.isHidden = true
     }
 
   
     @IBAction func powerPressed(_ sender: Any) {
-        category = "power"
-        selectedCategory(selection: category)
+        setupPower()
+        
+        //selectedCategory(selection: category)
     }
     
     @IBAction func magicPressed(_ sender: Any) {
-        category = "magic"
-        selectedCategory(selection: category)
+        setupCredit()
+        
+        
+        //selectedCategory(selection: category)
     }
     
     @IBAction func afflictionPressed(_ sender: Any) {
-        category = "affliction"
-        selectedCategory(selection: category)
+        setupAffliction()
+        
+        
+        //selectedCategory(selection: category)
     }
     
-    //using button.imageView?.image instead of button.setImage... will lead to problems
-    func selectedCategory(selection: String) {
-        switch selection {
-        case "power":
-            self.view.layoutIfNeeded()
-            resetMagic()
-            resetAffliction()
+    @IBAction func savePressed(_ sender: Any) {
+        var item: Item?
+        
+        if itemToEdit != nil {
+            item = itemToEdit
+        } else {
+            item = Item(context: context)
+            player?.addToItem(item!)
+        }
+        if item != nil {
+            item?.name = nameTxtField.text
+            item?.actualName = realNameTxtField.text
+            item?.category = category
             
-            UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveLinear], animations: {
-                
-                self.assetHeight.constant = 60
-                self.assetStackView.alpha = 1
-                self.powerBtn.setImage(UIImage(named: "Power"), for: .normal)
-            }, completion: nil)
+            switch category {
+            case "asset":
+                if assetValueTxtField.text != "" {
+                    let val = Double(assetValueTxtField.text!)!
+                    item?.value = val
+                } else {
+                    print("error with asset textfield")
+                }
+            case "credit":
+                if creditValueTxtField.text != "" {
+                    let val = Double(creditValueTxtField.text!)!
+                    item?.value = val
+                    if val > 0 {
+                        item?.debt = true
+                    } else {
+                        item?.debt = false
+                    }
+                } else {
+                    print("error with creditValueTextField")
+                }
+                if durabilityTxtField.text != "" {
+                    let durability = Double(durabilityTxtField.text!)!
+                    item?.durability = durability
+                } else {
+                    print("error with durability textfield")
+                }
+            case "debt":
+                if debtValueTxtField.text != "" {
+                    let val = Double(debtValueTxtField.text!)!
+                    item?.value = val
+                    if val > 0 {
+                        item?.debt = true
+                    } else {
+                        item?.debt = false
+                    }
+                }
+            default:
+                print("ro oh")
+            }
             
+            print("Item: \(item)")
+            ad.saveContext()
+            //add navigation controll delegate and add popViewController
+            navigationController?.popViewController(animated: true)
             
-            
-        case "magic":
-            self.view.layoutIfNeeded()
-            resetPower()
-            resetAffliction()
-            
-            UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveLinear], animations: {
-                
-                self.creditHeight.constant = 60
-                self.creditStackView.alpha = 1
-                self.magicBtn.setImage(UIImage(named: "Magic"), for: .normal)
-            }, completion: nil)
-            
-            
-            
-        case "affliction":
-            self.view.layoutIfNeeded()
-            resetPower()
-            resetMagic()
-            
-            UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveLinear], animations: {
-                
-                self.afflictionHeight.constant = 60
-                self.afflictionStackview.alpha = 1
-                self.afflictionBtn.setImage(UIImage(named: "Affliction"), for: .normal)
-            }, completion: nil)
-            
-            
+        } else {
+            print("error. Item is nil.")
+        }
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    func resetPower() {
+        powerBtn.setImage(UIImage(named: "unselectedPower"), for: .normal)
+    }
+    func resetMagic() {
+       magicBtn.setImage(UIImage(named: "unselectedMagic"), for: .normal)
+    }
+    func resetAffliction() {
+      afflictionBtn.setImage(UIImage(named: "unselectedAffliction"), for: .normal)
+    }
+    
+    func loadItem() {
+        print("Item found \(itemToEdit)")
+        nameTxtField.text = itemToEdit?.name
+        realNameTxtField.text = itemToEdit?.actualName
+        let category = itemToEdit?.category
+        currentState(category: category!)
+        
+        //if it is the main account, it cannot be changed from asset
+        if (itemToEdit?.main)! {
+            powerBtn.isEnabled = false
+            magicBtn.isEnabled = false
+            afflictionBtn.isEnabled = false
+        }
+        
+    }
+    
+    func currentState(category: String) {
+        switch category {
+        case "asset":
+            setupPower()
+            assetValueTxtField.text = String(format: "%0.2f",(itemToEdit?.value)!)
+        case "credit":
+            setupCredit()
+            creditValueTxtField.text = String(format: "%0.2f",(itemToEdit?.value)!)
+            durabilityTxtField.text = String(format: "%0.2f",(itemToEdit?.durability)!)
+        case "debt":
+            setupAffliction()
+            debtValueTxtField.text = String(format: "%0.2f",(itemToEdit?.value)!)
         default:
-            print("row oh")
+            print("")
+        }
+    }
+    
+    func setupPower() {
+        category = "asset"
+        powerBtn.setImage(UIImage(named: "Power"), for: .normal)
+        resetMagic()
+        resetAffliction()
+        self.view.layoutIfNeeded()
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveLinear], animations: {
+            self.stackViewLeading.constant = 10
+            
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    func setupCredit() {
+        category = "credit"
+        magicBtn.setImage(UIImage(named: "Magic"), for: .normal)
+        resetPower()
+        resetAffliction()
+        
+        self.view.layoutIfNeeded()
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveLinear], animations: {
+            self.stackViewLeading.constant = 10 - self.view.frame.width
+            
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    func setupAffliction() {
+        category = "debt"
+        afflictionBtn.setImage(UIImage(named: "Affliction"), for: .normal)
+        resetPower()
+        resetMagic()
+        self.view.layoutIfNeeded()
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveLinear], animations: {
+            self.stackViewLeading.constant = 10 - (self.view.frame.width * 2)
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if debtValueTxtField.isFirstResponder {
+            debtValueTxtField.resignFirstResponder()
+        }
+        if creditValueTxtField.isFirstResponder {
+            creditValueTxtField.resignFirstResponder()
+            
+        }
+        if durabilityTxtField.isFirstResponder {
+            durabilityTxtField.resignFirstResponder()
+            creditValueTxtField.becomeFirstResponder()
+            
+        }
+        if assetValueTxtField.isFirstResponder {
+            assetValueTxtField.resignFirstResponder()
+        }
+        if realNameTxtField.isFirstResponder {
+            realNameTxtField.resignFirstResponder()
+        }
+        if nameTxtField.isFirstResponder {
+            nameTxtField.resignFirstResponder()
+            realNameTxtField.becomeFirstResponder()
+        }
+        return true
+        
+    }
+    
+    @objc func handleTap() {
+        view.endEditing(true)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        
+        
+        if let text = Double(debtValueTxtField.text!) {
+            debtValueTxtField.text = String(format: "%0.2f", text)
+        } else {
+            debtValueTxtField.text = ""
+        }
+        
+        if let text = Double(creditValueTxtField.text!) {
+            creditValueTxtField.text = String(format: "%0.2f", text)
+        } else {
+            creditValueTxtField.text = ""
+        }
+        
+        if let text = Double(durabilityTxtField.text!) {
+            durabilityTxtField.text = String(format: "%0.2f", text)
+        } else {
+            durabilityTxtField.text = ""
+        }
+        
+        if let text = Double(assetValueTxtField.text!) {
+            assetValueTxtField.text = String(format: "%0.2f", text)
+        } else {
+            assetValueTxtField.text = ""
         }
         
         
         
+        
     }
     
-    func reset() {
-        category = ""
-        resetPower()
-        resetMagic()
-        resetAffliction()
-    }
     
-    func resetPower() {
-        self.view.layoutIfNeeded()
-        assetStackView.alpha = 0
-        UIView.animate(withDuration: 0.25, delay: 0.0, options: [.curveLinear], animations: {
-            self.assetHeight.constant = 4
-            
-            self.powerBtn.setImage(UIImage(named: "unselectedPower"), for: .normal)
-            
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-        
-    }
-    func resetMagic() {
-        self.view.layoutIfNeeded()
-        creditStackView.alpha = 0
-        UIView.animate(withDuration: 0.25, delay: 0.0, options: [.curveLinear], animations: {
-            self.creditHeight.constant = 4
-            
-            self.magicBtn.setImage(UIImage(named: "unselectedMagic"), for: .normal)
-            
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-        
-    }
-    func resetAffliction() {
-        self.view.layoutIfNeeded()
-        afflictionStackview.alpha = 0
-        UIView.animate(withDuration: 0.25, delay: 0.0, options: [.curveLinear], animations: {
-            self.afflictionHeight.constant = 4
-            
-            self.afflictionBtn.setImage(UIImage(named: "unselectedAffliction"), for: .normal)
-            
-            self.view.layoutIfNeeded()
-        }, completion: nil)
-        
-    }
     
     
     

@@ -26,7 +26,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hdO-AL-CkP">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hdO-AL-CkP" customClass="StatsView" customModule="BudgetBoss" customModuleProvider="target">
                     <rect key="frame" x="62" y="70" width="250" height="200"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0.00" textAlignment="right" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="IPi-V8-ep9">

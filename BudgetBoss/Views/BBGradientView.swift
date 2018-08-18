@@ -11,7 +11,7 @@ import UIKit
 
 class BBGradientView: UIView {
 
-    @IBInspectable var topColor: UIColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1) {
+    @IBInspectable var topColor: UIColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1) {
         didSet {
             self.setNeedsLayout()
         }

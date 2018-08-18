@@ -22,12 +22,13 @@ class ItemsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         tableView.delegate = self
         tableView.dataSource = self
 
-        // Do any additional setup after loading the view.
+        
     }
 
    
     override func viewWillAppear(_ animated: Bool) {
         fetch()
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -35,6 +36,7 @@ class ItemsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     @IBAction func newItemPressed(_ sender: Any) {
+        
     }
     
     func fetch() {
@@ -43,7 +45,6 @@ class ItemsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             if results.count > 0 {
                 character = results.first
                 items = character?.item?.array as! [Item]
-                print("print \(items[0].name)")
             }
                 
         } catch {
@@ -72,6 +73,32 @@ class ItemsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         } else {
             return UITableViewCell()
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //check segue identifier and destination (VC)
+        if segue.identifier == "editItem" {
+            if let destination = segue.destination as? EditItem {
+                if let item = sender as? Item {
+                    //send item selected and player
+                    destination.itemToEdit = item
+                    destination.player = character
+                    print("Item sent over: \(item)")
+                }
+            }
+        }
+        if segue.identifier == "createItem" {
+            if let destination = segue.destination as? EditItem {
+                destination.player = character
+                print("Player sent over: \(character)")
+            }
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selection = items[indexPath.row]
+        performSegue(withIdentifier: "editItem", sender: selection)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
