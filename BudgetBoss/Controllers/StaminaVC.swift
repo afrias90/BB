@@ -36,6 +36,10 @@ class StaminaVC: UIViewController {
         
     }
     
+    @IBAction func paydayPressed(_ sender: Any) {
+    }
+    
+    
     func fetch() {
         
     }

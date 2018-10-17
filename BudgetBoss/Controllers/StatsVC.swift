@@ -1,5 +1,5 @@
 //
-//  statsVC.swift
+//  StatsVC.swift
 //  BudgetBoss
 //
 //  Created by Adolfo Frias on 8/10/18.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class statsVC: UIViewController {
+class StatsVC: UIViewController {
     
     var character: Character?
     
@@ -42,37 +42,40 @@ class statsVC: UIViewController {
     var spendingAttack = 0.0
     var spendingDefense = 0.0
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         if character == nil {
+            //fetches player or sends player to character creation
             fetchPlayer()
         }
     }
     
     @IBAction func staminaPressed(_ sender: Any) {
-        let staminaView = StaminaVC()
-        staminaView.modalPresentationStyle = .custom
-        present(staminaView, animated: true, completion: nil)
+//        let staminaView = StaminaVC()
+//        staminaView.modalPresentationStyle = .custom
+//        present(staminaView, animated: true, completion: nil)
     }
     
     @IBAction func attackPressed(_ sender: Any) {
+        
     }
     
     @IBAction func defensePressed(_ sender: Any) {
     }
     
     func fetchPlayer() {
+        
         do {
+            
+            //is it ok to have the context globally available like this? is not, what's safer?
             let results = try context.fetch(Character.fetchRequest()) as [Character]
             if results.count > 0 {
                 
+                //if multiple saves added later, this will have to be changed
                 character = results.first
                 setupPlayer(character: character!)
                 //print(character?.attack, character?.defense, character?.affliction, character?.name)

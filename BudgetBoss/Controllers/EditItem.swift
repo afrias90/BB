@@ -9,6 +9,12 @@
 import UIKit
 import CoreData
 
+protocol EditItemVCDelegate: class {
+    func editItemVCDidCancel(_ controller: EditItem)
+    func editItemVC(_ controller: EditItem, didFinishAdding item: Item)
+    func editItemVC(_ controller: EditItem, didFinishEditing item: Item)
+}
+
 class EditItem: UIViewController, UITextFieldDelegate, UINavigationControllerDelegate {
     
     //variables
@@ -17,6 +23,7 @@ class EditItem: UIViewController, UITextFieldDelegate, UINavigationControllerDel
     var lastTextField: UITextField?
     var player: Character?
     
+    weak var delegate: EditItemVCDelegate?
     
     //constraints
     @IBOutlet weak var stackViewLeading: NSLayoutConstraint!
@@ -272,7 +279,7 @@ class EditItem: UIViewController, UITextFieldDelegate, UINavigationControllerDel
         view.endEditing(true)
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         
         
         if let text = Double(debtValueTxtField.text!) {

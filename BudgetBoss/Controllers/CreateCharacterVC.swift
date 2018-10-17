@@ -99,7 +99,7 @@ class CreateCharacterVC: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         if let text = Double(paycheckTxt.text!) {
             paycheckTxt.text = String(format: "%0.2f", text)
         } else {
