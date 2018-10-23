@@ -13,10 +13,21 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var startVC = StatsVC()
+    //need a way to initiate this at the beginning
+    var settings = Settings()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        startVC.settings = settings
+        
+//        let navigationController = window!.rootViewController as! UINavigationController
+//        let controller = navigationController.viewControllers[1] as! StaminaTVC
+//        controller.settings = settings
+        
+        
         return true
     }
 

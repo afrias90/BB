@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class StaminaVC: UIViewController {
+class StaminaXibVC: UIViewController {
     
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var textfield: UITextField!
@@ -19,7 +19,7 @@ class StaminaVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let closeTouch = UITapGestureRecognizer(target: self, action: #selector(StaminaVC.closeTap(_:)))
+        let closeTouch = UITapGestureRecognizer(target: self, action: #selector(StaminaXibVC.closeTap(_:)))
         bgView.addGestureRecognizer(closeTouch)
     }
 

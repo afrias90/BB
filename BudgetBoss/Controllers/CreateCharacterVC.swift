@@ -59,6 +59,9 @@ class CreateCharacterVC: UIViewController, UITextFieldDelegate {
         let character = Character(context: context)
         character.name = name
         character.stamina = stamina
+        //total stamina (pay day amount) should be added to defaults, and can be changed when a new payday is made
+        UserDefaults.standard.set(stamina, forKey: "TotalStamina")
+        
         character.category = "Cursed Warrior"
         
         let mainItem = Item(context: context)

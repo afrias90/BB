@@ -9,14 +9,17 @@
 import UIKit
 import CoreData
 
-class StatsVC: UIViewController {
+class StatsVC: UIViewController, UINavigationControllerDelegate {
+    
+    //instantiating settings here? correct/okay method? others?
+    var settings: Settings!
     
     var character: Character?
     
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var playerClassLbl: UILabel!
     
-    @IBOutlet weak var staminaAmt: UILabel!
+    @IBOutlet weak var totalStaminaAmt: UILabel!
     @IBOutlet weak var powerAmt: UILabel!
     @IBOutlet weak var magicAmt: UILabel!
     @IBOutlet weak var afflictionAmt: UILabel!
@@ -58,6 +61,7 @@ class StatsVC: UIViewController {
 //        let staminaView = StaminaVC()
 //        staminaView.modalPresentationStyle = .custom
 //        present(staminaView, animated: true, completion: nil)
+        performSegue(withIdentifier: "staminaSegue", sender: nil)
     }
     
     @IBAction func attackPressed(_ sender: Any) {
@@ -92,8 +96,11 @@ class StatsVC: UIViewController {
     }
     
     func setupPlayer(character: Character) {
+        //called after player fetched and found
+        
         nameLbl.text = character.name
-        staminaAmt.text = String(format: "%0.2f", character.stamina)
+        totalStaminaAmt.text = String(format: "%0.2f", UserDefaults.standard.double(forKey: "TotalStamina"))
+        //staminaAmt.text = String(format: "%0.2f", character.stamina)
 
 //        magicAmt.text =
 //        afflictionAmt.text =
