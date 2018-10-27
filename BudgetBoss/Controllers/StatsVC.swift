@@ -20,6 +20,10 @@ class StatsVC: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var playerClassLbl: UILabel!
     
     @IBOutlet weak var totalStaminaAmt: UILabel!
+    @IBOutlet weak var staminaProgressWidth: NSLayoutConstraint!
+    @IBOutlet weak var staminaLeftLabel: UILabel!
+    
+    
     @IBOutlet weak var powerAmt: UILabel!
     @IBOutlet weak var magicAmt: UILabel!
     @IBOutlet weak var afflictionAmt: UILabel!
@@ -50,11 +54,22 @@ class StatsVC: UIViewController, UINavigationControllerDelegate {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         if character == nil {
             //fetches player or sends player to character creation
             fetchPlayer()
+        } else {
+            // we can update things
+            let stamina = String(format: "%0.2f", UserDefaults.standard.double(forKey: "TotalStamina"))
+            if totalStaminaAmt.text != stamina {
+                totalStaminaAmt.text = stamina
+                
+            }
+            //changes in att and def here
+            setupPlayer(character: character!)
+            calcStaminaProgressBar()
         }
+        
     }
     
     @IBAction func staminaPressed(_ sender: Any) {
@@ -64,11 +79,34 @@ class StatsVC: UIViewController, UINavigationControllerDelegate {
         performSegue(withIdentifier: "staminaSegue", sender: nil)
     }
     
-    @IBAction func attackPressed(_ sender: Any) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "staminaSegue" {
+            let controller = segue.destination as! StaminaTVC
+            if character != nil {
+                controller.staminaUsed = character?.stamina
+            } else {
+                //character hasn't been created and someone clicked on stamina? who knows!
+            }
+        } else if segue.identifier == "attackSegue" {
+            let controller = segue.destination as! BudgetTVC
+            controller.abilityTitle = "Attack"
+            controller.abilityUsed = character?.attack
+            
+            
+        } else if segue.identifier == "defenseSegue" {
+            let controller = segue.destination as! BudgetTVC
+            controller.abilityTitle = "Defense"
+            controller.abilityUsed = character?.defense
+        }
         
     }
     
+    @IBAction func attackPressed(_ sender: Any) {
+        performSegue(withIdentifier: "attackSegue", sender: nil)
+    }
+    
     @IBAction func defensePressed(_ sender: Any) {
+        performSegue(withIdentifier: "defenseSegue", sender: nil)
     }
     
     func fetchPlayer() {
@@ -99,25 +137,65 @@ class StatsVC: UIViewController, UINavigationControllerDelegate {
         //called after player fetched and found
         
         nameLbl.text = character.name
-        totalStaminaAmt.text = String(format: "%0.2f", UserDefaults.standard.double(forKey: "TotalStamina"))
+        totalStaminaAmt.text = "/\(String(format: "%0.2f", UserDefaults.standard.double(forKey: "TotalStamina")))"
         //staminaAmt.text = String(format: "%0.2f", character.stamina)
 
 //        magicAmt.text =
 //        afflictionAmt.text =
         
-        let attack = String(format: "%0.2f", character.attack)
-        let defense = String(format: "%0.2f", character.defense)
+        let attack = UserDefaults.standard.double(forKey: "AttackBudget")
+        let defense = UserDefaults.standard.double(forKey: "DefenseBudget")
+        let attackUsed = character.attack
+        let defenseUsed = character.defense
         
-        attackLabel.text = "\(0)/ \(attack)"
-        defenseLabel.text = "\(0)/ \(defense)"
-    
-        attProgressContraint.constant = 0
-        defProgressContraint.constant = 0
+        let attackBudget = String(format: "%0.2f", attack)
+        let defenseBudget = String(format: "%0.2f", defense)
         
         
+        
+        let attackDiff = attack - attackUsed
+        let attackProgress = (attackDiff * 100) / attack
+        let defenseDiff = defense - defenseUsed
+        let defenseProgress = (defenseDiff * 100) / defense
+        
+        let attackUsedString = String(format: "%0.2f", attackDiff)
+        let defenseUsedString = String(format: "%0.2f", defenseDiff)
+        
+        attackLabel.text = "\(attackUsedString)/ \(attackBudget)"
+        defenseLabel.text = "\(defenseUsedString)/ \(defenseBudget)"
+        
+        
+        //when att/def is still set to zero, dividing for percetange will result in NaN for the double-values
+        if attackProgress.isNaN {
+            attProgressContraint.constant = 0
+        } else {
+            attProgressContraint.constant = CGFloat(attackProgress)
+        }
+        
+        if defenseProgress.isNaN {
+            defProgressContraint.constant = 0
+        } else {
+            defProgressContraint.constant = CGFloat(defenseProgress)
+        }
+        
+        //
+        calcStaminaProgressBar()
         //set up notification for progress bar?
     }
     
+    func calcStaminaProgressBar() {
+        //clean up later...
+        
+        let totalStamina = UserDefaults.standard.double(forKey: "TotalStamina")
+        let staminaUsed = character?.stamina
+        
+        let difference = totalStamina - staminaUsed!
+        staminaLeftLabel.text = String(format: "%0.2f", difference)
+        let percentage = difference / totalStamina
+        let progressBar = 100 * percentage
+        staminaProgressWidth.constant = CGFloat(progressBar)
+        
+    }
     
     
     

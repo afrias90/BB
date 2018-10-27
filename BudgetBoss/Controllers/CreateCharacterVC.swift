@@ -21,7 +21,7 @@ class CreateCharacterVC: UIViewController, UITextFieldDelegate {
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(CreateCharacterVC.handleTap))
         view.addGestureRecognizer(tap)
-        
+        nameTxt.becomeFirstResponder()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +58,9 @@ class CreateCharacterVC: UIViewController, UITextFieldDelegate {
     func createUser(name: String, stamina: Double, completion: @escaping CompletionHandler) {
         let character = Character(context: context)
         character.name = name
-        character.stamina = stamina
+        
+        //stamina used up, the total will be stored in defaults
+        character.stamina = 0.0
         //total stamina (pay day amount) should be added to defaults, and can be changed when a new payday is made
         UserDefaults.standard.set(stamina, forKey: "TotalStamina")
         
@@ -69,10 +71,11 @@ class CreateCharacterVC: UIViewController, UITextFieldDelegate {
         mainItem.name = "Sword Of Hope"
         mainItem.category = "asset"
         character.addToItem(mainItem)
+        //main item set to 0.00 for now...
         
         
-        print("\(character.name, character.stamina)")
-        print("\(mainItem.name, mainItem.category)")
+        //print("\(character.name, character.stamina)")
+        //print("\(mainItem.name, mainItem.category)")
         ad.saveContext()
         completion(true)
         

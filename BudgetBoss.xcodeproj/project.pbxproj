@@ -21,8 +21,11 @@
 		1848F14721224F200087B184 /* CreateCharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1848F14621224F200087B184 /* CreateCharacterVC.swift */; };
 		1848F14A21225E050087B184 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1848F14921225E050087B184 /* Constants.swift */; };
 		1860694A2120CF0100E676C3 /* BudgetCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186069492120CF0100E676C3 /* BudgetCalculation.swift */; };
-		1860694D2120F11C00E676C3 /* StaminaXibVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1860694B2120F11C00E676C3 /* StaminaXibVC.swift */; };
+		1860694D2120F11C00E676C3 /* StaminaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1860694B2120F11C00E676C3 /* StaminaVC.swift */; };
 		1860694E2120F11C00E676C3 /* StaminaVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1860694C2120F11C00E676C3 /* StaminaVC.xib */; };
+		186311FF2180C1D700624A2F /* BudgetTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186311FE2180C1D600624A2F /* BudgetTVC.swift */; };
+		186312022180C50A00624A2F /* BudgetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186312002180C50A00624A2F /* BudgetVC.swift */; };
+		186312032180C50A00624A2F /* BudgetVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186312012180C50A00624A2F /* BudgetVC.xib */; };
 		1884457F212510A8002E0932 /* ItemsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1884457E212510A8002E0932 /* ItemsVC.swift */; };
 		188445812125176C002E0932 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188445802125176C002E0932 /* ItemCell.swift */; };
 		18A7189821265A67000B8DD3 /* EditItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7189721265A67000B8DD3 /* EditItem.swift */; };
@@ -45,8 +48,11 @@
 		1848F14621224F200087B184 /* CreateCharacterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCharacterVC.swift; sourceTree = "<group>"; };
 		1848F14921225E050087B184 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		186069492120CF0100E676C3 /* BudgetCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCalculation.swift; sourceTree = "<group>"; };
-		1860694B2120F11C00E676C3 /* StaminaXibVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaminaXibVC.swift; sourceTree = "<group>"; };
+		1860694B2120F11C00E676C3 /* StaminaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaminaVC.swift; sourceTree = "<group>"; };
 		1860694C2120F11C00E676C3 /* StaminaVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StaminaVC.xib; sourceTree = "<group>"; };
+		186311FE2180C1D600624A2F /* BudgetTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetTVC.swift; sourceTree = "<group>"; };
+		186312002180C50A00624A2F /* BudgetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetVC.swift; sourceTree = "<group>"; };
+		186312012180C50A00624A2F /* BudgetVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BudgetVC.xib; sourceTree = "<group>"; };
 		1884457E212510A8002E0932 /* ItemsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsVC.swift; sourceTree = "<group>"; };
 		188445802125176C002E0932 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		18A7189721265A67000B8DD3 /* EditItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItem.swift; sourceTree = "<group>"; };
@@ -111,7 +117,9 @@
 			children = (
 				18188CEF211E327300DE8DB5 /* StatsVC.swift */,
 				18112FB4217B7E530015AFB9 /* StaminaTVC.swift */,
-				1860694B2120F11C00E676C3 /* StaminaXibVC.swift */,
+				1860694B2120F11C00E676C3 /* StaminaVC.swift */,
+				186311FE2180C1D600624A2F /* BudgetTVC.swift */,
+				186312002180C50A00624A2F /* BudgetVC.swift */,
 				1884457E212510A8002E0932 /* ItemsVC.swift */,
 				18A7189721265A67000B8DD3 /* EditItem.swift */,
 				1848F14621224F200087B184 /* CreateCharacterVC.swift */,
@@ -150,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				1860694C2120F11C00E676C3 /* StaminaVC.xib */,
+				186312012180C50A00624A2F /* BudgetVC.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -214,6 +223,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				186312032180C50A00624A2F /* BudgetVC.xib in Resources */,
 				1860694E2120F11C00E676C3 /* StaminaVC.xib in Resources */,
 				18188CFB211E327400DE8DB5 /* LaunchScreen.storyboard in Resources */,
 				18188CF8211E327400DE8DB5 /* Assets.xcassets in Resources */,
@@ -244,10 +254,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1860694D2120F11C00E676C3 /* StaminaXibVC.swift in Sources */,
+				1860694D2120F11C00E676C3 /* StaminaVC.swift in Sources */,
 				18188CF6211E327300DE8DB5 /* BudgetBoss.xcdatamodeld in Sources */,
+				186311FF2180C1D700624A2F /* BudgetTVC.swift in Sources */,
 				1884457F212510A8002E0932 /* ItemsVC.swift in Sources */,
 				18A7189821265A67000B8DD3 /* EditItem.swift in Sources */,
+				186312022180C50A00624A2F /* BudgetVC.swift in Sources */,
 				18188CF0211E327300DE8DB5 /* StatsVC.swift in Sources */,
 				18188D0E211FAE8000DE8DB5 /* StatsView.swift in Sources */,
 				1848F14721224F200087B184 /* CreateCharacterVC.swift in Sources */,

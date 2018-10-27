@@ -7,9 +7,16 @@
 //
 
 import UIKit
-import CoreData
 
-class StaminaXibVC: UIViewController {
+protocol StaminaXibVCDelegate: class {
+    func staminaXibVCDidCancel(_ controller: StaminaVC)
+    func staminaXibVC(_ controller: StaminaVC, didFinishEditing stamina: Double)
+}
+
+class StaminaVC: UIViewController {
+    
+    //not sure if this is enough to get the delegate to work...
+    var delegate: StaminaXibVCDelegate?
     
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var textfield: UITextField!
@@ -19,8 +26,10 @@ class StaminaXibVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let closeTouch = UITapGestureRecognizer(target: self, action: #selector(StaminaXibVC.closeTap(_:)))
+        let closeTouch = UITapGestureRecognizer(target: self, action: #selector(StaminaVC.closeTap(_:)))
         bgView.addGestureRecognizer(closeTouch)
+        
+        textfield.becomeFirstResponder()
     }
 
     
@@ -34,11 +43,17 @@ class StaminaXibVC: UIViewController {
     
     @IBAction func setStaminaPressed(_ sender: Any) {
         
+        if let stamina = Double(textfield.text!) {
+            delegate?.staminaXibVC(self, didFinishEditing: stamina)
+            dismiss(animated: true, completion: nil)
+        } else {
+            
+        }
+        
+        
     }
     
-    @IBAction func paydayPressed(_ sender: Any) {
-    }
-    
+   
     
     func fetch() {
         

@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StaminaXibVC" customModule="BudgetBoss" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StaminaVC" customModule="BudgetBoss" customModuleProvider="target">
             <connections>
                 <outlet property="bgView" destination="xw2-rM-3G3" id="Ab7-KN-SNG"/>
                 <outlet property="textfield" destination="IPi-V8-ep9" id="7C7-cI-FOo"/>
@@ -29,9 +29,10 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hdO-AL-CkP" customClass="StatsView" customModule="BudgetBoss" customModuleProvider="target">
                     <rect key="frame" x="62.5" y="70" width="250" height="200"/>
                     <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0.00" textAlignment="right" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="IPi-V8-ep9">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0.00" textAlignment="center" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="IPi-V8-ep9">
                             <rect key="frame" x="62.5" y="69" width="125" height="30"/>
                             <constraints>
+                                <constraint firstAttribute="height" constant="30" id="pLb-R0-2KH"/>
                                 <constraint firstAttribute="width" constant="125" id="xpJ-sL-eHd"/>
                             </constraints>
                             <nil key="textColor"/>
@@ -51,28 +52,14 @@
                                 <action selector="closeTapped:" destination="-1" eventType="touchUpInside" id="wKT-nO-76g"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Stamina" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ivi-OJ-EC0">
-                            <rect key="frame" x="77" y="30" width="97" height="29"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stamina" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ivi-OJ-EC0">
+                            <rect key="frame" x="76.5" y="30" width="97" height="29"/>
                             <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="22"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="as8-qM-S2T">
-                            <rect key="frame" x="62.5" y="149" width="125" height="35"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="125" id="zfk-aI-WB2"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="17"/>
-                            <state key="normal" title="Payday">
-                                <color key="titleColor" red="0.59309565360000005" green="0.34407034910000001" blue="0.0076309559969999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="paydayPressed:" destination="-1" eventType="touchUpInside" id="4jA-IR-Sdx"/>
-                                <action selector="setStaminaPressed:" destination="-1" eventType="touchUpInside" id="L9Q-7e-UUZ"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOU-hD-q5h">
-                            <rect key="frame" x="62.5" y="104" width="125" height="35"/>
+                            <rect key="frame" x="62.5" y="104" width="125" height="72"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="125" id="PMn-dd-DRL"/>
                             </constraints>
@@ -90,11 +77,11 @@
                         <constraint firstItem="HOU-hD-q5h" firstAttribute="centerX" secondItem="hdO-AL-CkP" secondAttribute="centerX" id="3Ky-cs-jZe"/>
                         <constraint firstAttribute="height" constant="200" id="8cP-Hm-0SP"/>
                         <constraint firstAttribute="width" constant="250" id="9Bu-UQ-zxE"/>
-                        <constraint firstItem="as8-qM-S2T" firstAttribute="top" secondItem="HOU-hD-q5h" secondAttribute="bottom" constant="10" id="IJr-Uf-wHW"/>
                         <constraint firstAttribute="trailing" secondItem="iQ9-d5-eHD" secondAttribute="trailing" constant="5" id="Lpo-0s-ETb"/>
                         <constraint firstItem="iQ9-d5-eHD" firstAttribute="top" secondItem="hdO-AL-CkP" secondAttribute="top" constant="5" id="M3i-g7-uG9"/>
                         <constraint firstItem="IPi-V8-ep9" firstAttribute="top" secondItem="ivi-OJ-EC0" secondAttribute="bottom" constant="10" id="OHV-B3-fXZ"/>
-                        <constraint firstItem="as8-qM-S2T" firstAttribute="centerX" secondItem="hdO-AL-CkP" secondAttribute="centerX" id="Xcb-4p-5gs"/>
+                        <constraint firstItem="ivi-OJ-EC0" firstAttribute="centerX" secondItem="hdO-AL-CkP" secondAttribute="centerX" id="QiH-vM-Bae"/>
+                        <constraint firstItem="HOU-hD-q5h" firstAttribute="centerY" secondItem="hdO-AL-CkP" secondAttribute="centerY" constant="40" id="WfO-qW-RtK"/>
                         <constraint firstItem="HOU-hD-q5h" firstAttribute="top" secondItem="IPi-V8-ep9" secondAttribute="bottom" constant="5" id="YvW-fp-fbk"/>
                         <constraint firstItem="IPi-V8-ep9" firstAttribute="centerX" secondItem="hdO-AL-CkP" secondAttribute="centerX" id="cEf-aE-Lku"/>
                         <constraint firstItem="ivi-OJ-EC0" firstAttribute="top" secondItem="hdO-AL-CkP" secondAttribute="top" constant="30" id="tG1-P9-6ne"/>
