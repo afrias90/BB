@@ -68,6 +68,7 @@ class StatsVC: UIViewController, UINavigationControllerDelegate {
             //changes in att and def here
             setupPlayer(character: character!)
             calcStaminaProgressBar()
+            calculatePMA()
         }
         
     }
@@ -181,6 +182,7 @@ class StatsVC: UIViewController, UINavigationControllerDelegate {
         //
         calcStaminaProgressBar()
         //set up notification for progress bar?
+        calculatePMA()
     }
     
     func calcStaminaProgressBar() {
@@ -194,6 +196,33 @@ class StatsVC: UIViewController, UINavigationControllerDelegate {
         let percentage = difference / totalStamina
         let progressBar = 100 * percentage
         staminaProgressWidth.constant = CGFloat(progressBar)
+        
+    }
+    
+    func calculatePMA() {
+        // debt, credit, asset
+        let items = character?.item?.array as! [Item]
+        var pow = 0.0
+        var mag = 0.0
+        var aff = 0.0
+        
+        for item in items {
+            if item.category == "asset" {
+                pow += item.value
+            } else if item.category == "credit" {
+                mag += item.durability
+                //defined by debt == true
+                aff += item.value
+            } else if item.category == "debt" {
+                //defined by debt == true
+                aff += item.value
+            }
+            
+        }
+        
+        powerAmt.text = String(format: "%0.2f", pow)
+        magicAmt.text = String(format: "%0.2f", mag)
+        afflictionAmt.text = String(format: "%0.2f", aff)
         
     }
     

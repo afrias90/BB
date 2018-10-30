@@ -21,7 +21,7 @@ class ItemsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-
+        
         
     }
 
