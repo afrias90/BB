@@ -95,7 +95,6 @@ class BudgetTVC: UITableViewController, BudgetXibDelegate {
         }
         
         abilityTotal = UserDefaults.standard.double(forKey: ability)
-        print("Attack Budget: \(abilityTotal)")
         
         if abilityTotal == nil || abilityUsed == nil {
             budgetAmount.text = " ? / ? "

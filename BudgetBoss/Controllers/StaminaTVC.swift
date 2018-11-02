@@ -18,7 +18,6 @@ class StaminaTVC: UITableViewController, StaminaXibVCDelegate {
         //new stamina total
         UserDefaults.standard.set(stamina, forKey: "TotalStamina")
         staminaTotal = UserDefaults.standard.double(forKey: "TotalStamina")
-        print("new stamina: \(staminaTotal)")
         setupInfo()
         calcInfo()
         
@@ -65,7 +64,6 @@ class StaminaTVC: UITableViewController, StaminaXibVCDelegate {
     override func viewWillAppear(_ animated: Bool) {
         startDate = UserDefaults.standard.object(forKey: "StartDate") as! Date
         staminaTotal = UserDefaults.standard.double(forKey: "TotalStamina")
-        print("Our total stamina is: \(staminaTotal)")
         setupTodaysDate()
         setupDate()
         setupInfo()

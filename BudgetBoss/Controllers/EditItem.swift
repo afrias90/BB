@@ -145,8 +145,7 @@ class EditItem: UIViewController, UITextFieldDelegate, UINavigationControllerDel
             default:
                 print("ro oh")
             }
-            
-            print("Item: \(item)")
+
             ad.saveContext()
             //add navigation controll delegate and add popViewController
             navigationController?.popViewController(animated: true)
@@ -174,7 +173,6 @@ class EditItem: UIViewController, UITextFieldDelegate, UINavigationControllerDel
     }
     
     func loadItem() {
-        print("Item found \(itemToEdit)")
         nameTxtField.text = itemToEdit?.name
         realNameTxtField.text = itemToEdit?.actualName
         let category = itemToEdit?.category

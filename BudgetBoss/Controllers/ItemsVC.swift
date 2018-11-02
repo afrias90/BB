@@ -90,7 +90,6 @@ class ItemsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         if segue.identifier == "createItem" {
             if let destination = segue.destination as? EditItem {
                 destination.player = character
-                print("Player sent over: \(character)")
             }
         }
         
