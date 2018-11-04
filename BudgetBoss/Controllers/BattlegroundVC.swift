@@ -157,8 +157,14 @@ class BattlegroundVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         // selecting lists
         if indexPath.section == 2 {
             //update this when lists are done
-            let list = lists[indexPath.row]
-            performSegue(withIdentifier: "listSegue", sender: list)
+            if lists[indexPath.row] == "Targets" {
+                performSegue(withIdentifier: "targetListSegue", sender: nil)
+            } else if lists[indexPath.row] == "Moves" {
+                performSegue(withIdentifier: "moveListSegue", sender: nil)
+            } else if lists[indexPath.row] == "Categories" {
+                performSegue(withIdentifier: "categoryListSegue", sender: nil)
+            }
+            
         }
     }
     
@@ -171,15 +177,49 @@ class BattlegroundVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                     print("Action chosen: \(action)")
                 }
             }
-        } else if segue.identifier == "listSegue" {
-            if let destination = segue.destination as? ListVC {
-                if let list = sender as? String {
-                    destination.listName = list
-                    print("List chosen: \(list)")
-                }
+        }
+//        } else if segue.identifier == "listSegue" {
+//            if let destination = segue.destination as? TargetListVC {
+//                if let list = sender as? String {
+//                    destination.listName = list
+//                    print("List chosen: \(list)")
+//                }
+//            }
+//        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        //first view that can lead to categories (i think)
+        // check to see if there are any, if not, population preloadedCategories
+        do {
+           let results = try context.fetch(ObjCategory.fetchRequest()) as [ObjCategory]
+            if results.isEmpty {
+                preloadCategories()
             }
+            
+        } catch let error as NSError {
+            print(error)
         }
     }
+    
+    var preloadedCategories = [
+    "Mortgage/Rent",
+    "Food/Dining",
+    "Utility",
+    "Internet",
+    "Junk Food"
+    ]
+    
+    func preloadCategories() {
+        for cat in preloadedCategories {
+            let newCat = ObjCategory(context: context)
+            newCat.name = cat
+        }
+        //will this save all the new items? yes!
+        ad.saveContext()
+    }
+    
+    
 
 
 }

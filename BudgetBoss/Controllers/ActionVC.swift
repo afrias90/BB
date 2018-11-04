@@ -9,17 +9,19 @@
 import UIKit
 import CoreData
 
-class ActionVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource {
+class ActionVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     //variables
     var actionName: String?
-    var targets: [Merchant]?
-    var moves: [Object]?
+    var targets: [Merchant] = []
+    var moves: [Move] = []
     var equipment: [Item] = []
     var pickerChoice = ""
     
     //optionals that must be present to proceed
     var selectedEquipment: Item?
+    var selectedTarget: Merchant?
+    var selectedMove: Move?
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -34,14 +36,14 @@ class ActionVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource {
             }
         }
         if pickerChoice == "targets" {
-            if targets != nil {
-                return (targets?.count)!
+            if targets.isEmpty == false {
+                return targets.count
             } else {
                 return 1
             }
         } else if pickerChoice == "moves" {
-            if moves != nil {
-                return (moves?.count)!
+            if moves.isEmpty == false {
+                return moves.count
             } else {
                 return 1
             }
@@ -64,6 +66,31 @@ class ActionVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource {
                 return equipmentNames[row]
             }
         }
+        if pickerChoice == "targets" {
+            if targets.isEmpty == false {
+                print("we have targets")
+                var targetNames: [String] = []
+                for target in targets {
+                    let name = target.name
+                    targetNames.append(name!)
+                }
+                return targetNames[row]
+            }
+        }
+        
+        if pickerChoice == "moves" {
+            if moves.isEmpty == false {
+                print("we have moves")
+                var moveNames: [String] = []
+                for move in moves {
+                    let name = move.name
+                    moveNames.append(name!)
+                }
+                return moveNames[row]
+            }
+        }
+        
+        
         //error
         return "Shut up"
     }
@@ -86,6 +113,18 @@ class ActionVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource {
             
             pickerView.isHidden = true
         }
+        
+        if pickerChoice == "targets" {
+            selectedTarget = targets[row]
+            targetNameLabel.text = selectedTarget?.name
+            pickerView.isHidden = true
+        }
+        if pickerChoice == "moves" {
+            selectedMove = moves[row]
+            objectNameLabel.text = selectedMove?.name
+            pickerView.isHidden = true
+        }
+        
     }
     
     
@@ -131,8 +170,10 @@ class ActionVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource {
             title = actionName!
         }
         fetchEquipment()
-        itemPowerLabel.text = "??"
-        itemMagicLabel.text = "??"
+        fetchTargets()
+        fetchMoves()
+        itemPowerLabel.text = "NA"
+        itemMagicLabel.text = "NA"
     }
     
     
@@ -147,6 +188,7 @@ class ActionVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource {
         pickerChoice = "targets"
         picker.reloadAllComponents()
         picker.isHidden = false
+        
     }
     
     @IBAction func objectAddTapped(_ sender: Any) {
@@ -157,6 +199,9 @@ class ActionVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     @IBAction func proceedTapped(_ sender: Any) {
+        if selectedEquipment != nil && selectedTarget != nil && selectedMove != nil && damageLabel.text != "" {
+            
+        }
     }
     
    
@@ -193,11 +238,65 @@ class ActionVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource {
     
     //will need to add to these lists to test this out...
     func fetchTargets() {
+        do {
+            let results = try context.fetch(Merchant.fetchRequest()) as [Merchant]
+            if results.count > 0 {
+                targets = results
+            }
+        } catch let error as NSError {
+            print(error)
+        }
+        
         
     }
     
     func fetchMoves() {
+        do {
+            let results = try context.fetch(Move.fetchRequest()) as [Move]
+            if results.count > 0 {
+                moves = results
+            }
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if targetNameLabel.text != "" {
+            if selectedTarget != nil {
+                //editing stopped, and there's something and a selected target
+                if targetNameLabel.text != selectedTarget?.name {
+                    //and they don't match
+                    // copy name from text? if selected target is Nil, and don't create a new item?
+                }
+            } else {
+                //no selected target
+                //may just copy name from text
+            }
+        }
         
+        if let text = Double(damageLabel.text!) {
+            damageLabel.text = String(format: "%0.2f", text)
+        } else {
+            damageLabel.text = ""
+        }
+        
+    }
+    
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if damageLabel.isFirstResponder {
+            damageLabel.resignFirstResponder()
+        }
+        if objectNameLabel.isFirstResponder {
+            objectNameLabel.resignFirstResponder()
+        }
+        if targetNameLabel.isFirstResponder {
+            targetNameLabel.resignFirstResponder()
+        }
+        
+        return true
     }
     
 

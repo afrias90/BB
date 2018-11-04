@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18094CBE218F890000E9B7B5 /* CatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18094CBD218F890000E9B7B5 /* CatListVC.swift */; };
+		18094CC0218F891B00E9B7B5 /* CatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18094CBF218F891B00E9B7B5 /* CatCell.swift */; };
+		18094CC4218F8DD900E9B7B5 /* EditCatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18094CC3218F8DD900E9B7B5 /* EditCatVC.swift */; };
 		18112FB5217B7E530015AFB9 /* StaminaTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18112FB4217B7E530015AFB9 /* StaminaTVC.swift */; };
 		18112FB8217E83F30015AFB9 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18112FB7217E83F30015AFB9 /* Settings.swift */; };
 		18188CEE211E327300DE8DB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18188CED211E327300DE8DB5 /* AppDelegate.swift */; };
@@ -20,7 +23,12 @@
 		18188D0E211FAE8000DE8DB5 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18188D0D211FAE8000DE8DB5 /* StatsView.swift */; };
 		18393C8A218B26C900065F58 /* BattlegroundCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18393C89218B26C900065F58 /* BattlegroundCellView.swift */; };
 		18393C8C218BDC5800065F58 /* ActionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18393C8B218BDC5800065F58 /* ActionVC.swift */; };
-		18393C8E218BDC6A00065F58 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18393C8D218BDC6A00065F58 /* ListVC.swift */; };
+		18393C8E218BDC6A00065F58 /* TargetListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18393C8D218BDC6A00065F58 /* TargetListVC.swift */; };
+		18393C90218F379300065F58 /* TargetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18393C8F218F379300065F58 /* TargetCell.swift */; };
+		18393C94218F41DF00065F58 /* EditTargetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18393C93218F41DF00065F58 /* EditTargetVC.swift */; };
+		18393C96218F527100065F58 /* MoveListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18393C95218F527100065F58 /* MoveListVC.swift */; };
+		18393C98218F553400065F58 /* ObjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18393C97218F553400065F58 /* ObjectCell.swift */; };
+		18393C9A218F573A00065F58 /* EditMoveVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18393C99218F573A00065F58 /* EditMoveVC.swift */; };
 		1848F14721224F200087B184 /* CreateCharacterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1848F14621224F200087B184 /* CreateCharacterVC.swift */; };
 		1848F14A21225E050087B184 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1848F14921225E050087B184 /* Constants.swift */; };
 		1860694A2120CF0100E676C3 /* BudgetCalculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186069492120CF0100E676C3 /* BudgetCalculation.swift */; };
@@ -39,6 +47,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18094CBD218F890000E9B7B5 /* CatListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatListVC.swift; sourceTree = "<group>"; };
+		18094CBF218F891B00E9B7B5 /* CatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatCell.swift; sourceTree = "<group>"; };
+		18094CC3218F8DD900E9B7B5 /* EditCatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCatVC.swift; sourceTree = "<group>"; };
 		18112FB4217B7E530015AFB9 /* StaminaTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaminaTVC.swift; sourceTree = "<group>"; };
 		18112FB7217E83F30015AFB9 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		18188CEA211E327300DE8DB5 /* BudgetBoss.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BudgetBoss.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,7 +65,12 @@
 		18188D0D211FAE8000DE8DB5 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		18393C89218B26C900065F58 /* BattlegroundCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattlegroundCellView.swift; sourceTree = "<group>"; };
 		18393C8B218BDC5800065F58 /* ActionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionVC.swift; sourceTree = "<group>"; };
-		18393C8D218BDC6A00065F58 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
+		18393C8D218BDC6A00065F58 /* TargetListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetListVC.swift; sourceTree = "<group>"; };
+		18393C8F218F379300065F58 /* TargetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetCell.swift; sourceTree = "<group>"; };
+		18393C93218F41DF00065F58 /* EditTargetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTargetVC.swift; sourceTree = "<group>"; };
+		18393C95218F527100065F58 /* MoveListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveListVC.swift; sourceTree = "<group>"; };
+		18393C97218F553400065F58 /* ObjectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectCell.swift; sourceTree = "<group>"; };
+		18393C99218F573A00065F58 /* EditMoveVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMoveVC.swift; sourceTree = "<group>"; };
 		1848F14621224F200087B184 /* CreateCharacterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCharacterVC.swift; sourceTree = "<group>"; };
 		1848F14921225E050087B184 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		186069492120CF0100E676C3 /* BudgetCalculation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCalculation.swift; sourceTree = "<group>"; };
@@ -140,7 +156,12 @@
 				1848F14621224F200087B184 /* CreateCharacterVC.swift */,
 				187282BA218A726B00D557CF /* BattlegroundVC.swift */,
 				18393C8B218BDC5800065F58 /* ActionVC.swift */,
-				18393C8D218BDC6A00065F58 /* ListVC.swift */,
+				18393C8D218BDC6A00065F58 /* TargetListVC.swift */,
+				18393C93218F41DF00065F58 /* EditTargetVC.swift */,
+				18393C95218F527100065F58 /* MoveListVC.swift */,
+				18393C99218F573A00065F58 /* EditMoveVC.swift */,
+				18094CBD218F890000E9B7B5 /* CatListVC.swift */,
+				18094CC3218F8DD900E9B7B5 /* EditCatVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -188,6 +209,9 @@
 				187282BE218A7B1100D557CF /* SummaryCell.swift */,
 				187282C0218A7D5F00D557CF /* ActionCell.swift */,
 				187282C4218A83D400D557CF /* EditingCell.swift */,
+				18393C8F218F379300065F58 /* TargetCell.swift */,
+				18393C97218F553400065F58 /* ObjectCell.swift */,
+				18094CBF218F891B00E9B7B5 /* CatCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -284,22 +308,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				1860694D2120F11C00E676C3 /* StaminaVC.swift in Sources */,
+				18094CC4218F8DD900E9B7B5 /* EditCatVC.swift in Sources */,
+				18094CBE218F890000E9B7B5 /* CatListVC.swift in Sources */,
 				187282C1218A7D5F00D557CF /* ActionCell.swift in Sources */,
 				18188CF6211E327300DE8DB5 /* BudgetBoss.xcdatamodeld in Sources */,
 				186311FF2180C1D700624A2F /* BudgetTVC.swift in Sources */,
 				1884457F212510A8002E0932 /* ItemsVC.swift in Sources */,
+				18393C9A218F573A00065F58 /* EditMoveVC.swift in Sources */,
 				18A7189821265A67000B8DD3 /* EditItem.swift in Sources */,
 				187282BB218A726B00D557CF /* BattlegroundVC.swift in Sources */,
 				186312022180C50A00624A2F /* BudgetVC.swift in Sources */,
 				18188CF0211E327300DE8DB5 /* StatsVC.swift in Sources */,
+				18094CC0218F891B00E9B7B5 /* CatCell.swift in Sources */,
 				18188D0E211FAE8000DE8DB5 /* StatsView.swift in Sources */,
 				1848F14721224F200087B184 /* CreateCharacterVC.swift in Sources */,
+				18393C94218F41DF00065F58 /* EditTargetVC.swift in Sources */,
 				187282BF218A7B1100D557CF /* SummaryCell.swift in Sources */,
-				18393C8E218BDC6A00065F58 /* ListVC.swift in Sources */,
+				18393C8E218BDC6A00065F58 /* TargetListVC.swift in Sources */,
 				18112FB5217B7E530015AFB9 /* StaminaTVC.swift in Sources */,
+				18393C90218F379300065F58 /* TargetCell.swift in Sources */,
 				1848F14A21225E050087B184 /* Constants.swift in Sources */,
 				18112FB8217E83F30015AFB9 /* Settings.swift in Sources */,
+				18393C98218F553400065F58 /* ObjectCell.swift in Sources */,
 				1860694A2120CF0100E676C3 /* BudgetCalculation.swift in Sources */,
+				18393C96218F527100065F58 /* MoveListVC.swift in Sources */,
 				187282C5218A83D400D557CF /* EditingCell.swift in Sources */,
 				18393C8A218B26C900065F58 /* BattlegroundCellView.swift in Sources */,
 				188445812125176C002E0932 /* ItemCell.swift in Sources */,
