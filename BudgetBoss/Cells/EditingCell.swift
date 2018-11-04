@@ -29,8 +29,20 @@ class EditingCell: UITableViewCell {
     
     
     
-    func configureListCell(merchant: Merchant?, moves: String?) {
-        
+    func configureListCell(list: String?) {
+        switch list {
+        case "Targets":
+            listName.text = "Targets"
+            listDescript.text = "Name of service/merchant/seller"
+        case "Moves":
+            listName.text = "Moves"
+            listDescript.text = "Give the things that cost you big a scary name!"
+        case "Categories":
+            listName.text = "Categories"
+            listDescript.text = "purchase (moves) categories."
+        default:
+            print("we have a problem big chief")
+        }
     
     }
     

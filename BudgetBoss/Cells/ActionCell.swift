@@ -53,7 +53,7 @@ class ActionCell: UITableViewCell {
         case "Sickness":
             actionNameLabel.text = action
             actionImage.image = UIImage(named: "sickness")
-            actionDescriptLabel.text = "More debt... Click here"
+            actionDescriptLabel.text = "Fees? More debt..."
         case "Energy":
             actionNameLabel.text = action
             actionImage.image = UIImage(named: "Energy")

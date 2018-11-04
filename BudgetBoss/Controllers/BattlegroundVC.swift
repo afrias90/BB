@@ -22,6 +22,12 @@ class BattlegroundVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     "Energy"
     ]
     
+    var lists = [
+    "Targets",
+    "Moves",
+    "Categories"
+    ]
+    
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -52,7 +58,7 @@ class BattlegroundVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         if section == 2 {
             //test for now
-            return 1
+            return lists.count
         }
         return 0
     }
@@ -82,7 +88,8 @@ class BattlegroundVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             
         } else if indexPath.section == 2 {
                     if let cell = tableView.dequeueReusableCell(withIdentifier: "editingCell", for: indexPath) as? EditingCell {
-                        cell.configureListCell(merchant: nil, moves: "Enemies")
+                        let list = lists[indexPath.row]
+                        cell.configureListCell(list: list)
                         return cell
                     }
         }
@@ -134,9 +141,9 @@ class BattlegroundVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
 
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
-    }
+//    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+//        return false
+//    }
     
     
     
@@ -150,7 +157,7 @@ class BattlegroundVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         // selecting lists
         if indexPath.section == 2 {
             //update this when lists are done
-            let list = "Enemies"
+            let list = lists[indexPath.row]
             performSegue(withIdentifier: "listSegue", sender: list)
         }
     }

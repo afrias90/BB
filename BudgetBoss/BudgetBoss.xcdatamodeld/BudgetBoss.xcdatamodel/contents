@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G2208" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18B75" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Character" representedClassName="Character" syncable="YES" codeGenerationType="class">
         <attribute name="attack" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="category" optional="YES" attributeType="String" defaultValueString="Cursed Warrior" syncable="YES"/>
@@ -36,12 +36,25 @@
         <attribute name="actualName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="boss" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastObject" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ObjCategory" representedClassName="ObjCategory" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="object" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Object" inverseName="category" inverseEntity="Object" syncable="YES"/>
+    </entity>
+    <entity name="Object" representedClassName="Object" syncable="YES" codeGenerationType="class">
+        <attribute name="actualName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastPrice" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ObjCategory" inverseName="object" inverseEntity="ObjCategory" syncable="YES"/>
     </entity>
     <elements>
         <element name="Character" positionX="2088" positionY="-1017" width="128" height="150"/>
         <element name="Item" positionX="1890" positionY="-1026" width="128" height="163"/>
         <element name="Log" positionX="2286" positionY="-1008" width="128" height="210"/>
-        <element name="Merchant" positionX="2097" positionY="-1161" width="128" height="105"/>
+        <element name="Merchant" positionX="2097" positionY="-1161" width="128" height="118"/>
+        <element name="Object" positionX="1912.8828125" positionY="-1159.66796875" width="128" height="103"/>
+        <element name="ObjCategory" positionX="1740.015625" positionY="-1139.55859375" width="128" height="73"/>
     </elements>
 </model>
