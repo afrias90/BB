@@ -17,6 +17,7 @@ class ActionVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource, U
     var moves: [Move] = []
     var equipment: [Item] = []
     var pickerChoice = ""
+    var character: Character?
     
     //optionals that must be present to proceed
     var selectedEquipment: Item?
@@ -172,6 +173,7 @@ class ActionVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource, U
         fetchEquipment()
         fetchTargets()
         fetchMoves()
+        fetchPlayer()
         itemPowerLabel.text = "NA"
         itemMagicLabel.text = "NA"
     }
@@ -200,7 +202,68 @@ class ActionVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource, U
     
     @IBAction func proceedTapped(_ sender: Any) {
         if selectedEquipment != nil && selectedTarget != nil && selectedMove != nil && damageLabel.text != "" {
+            //initial check for all four parameters complete
+            if selectedEquipment?.category == "credit" {
+                //check to see that creditcard has enough durability or purchase would be declined
+                //damagelabel should already be in the correct format
+                if let damage = Double(damageLabel.text!) {
+                    if (selectedEquipment?.durability)! >= damage {
+                        
+                    } else {
+                        // show warning that there isn't enough credit
+                    }
+                }
+                //if selectedEquipment?.durability
+                
+            } else if selectedEquipment?.category == "asset" {
+                //do you have enough buying power?
+                if let damage = Double(damageLabel.text!) {
+                    if (selectedEquipment?.value)! >= damage {
+                        //funds have gone through! Let's record
+                        //Total stamina to calculate stuff
+                        let totalStamina = UserDefaults.standard.double(forKey: "TotalStamina")
+                        let staminaLeft = totalStamina - (character?.stamina)!
+                        //stamina used
+                        character?.stamina += damage
+                        
+                        
+                        //The log!
+                        let log = Log(context: context)
+                        log.category = selectedEquipment?.category
+                        log.date = Date()
+                        log.expense = true
+                        log.itemName = selectedEquipment?.name
+                        log.targetNewPower = ((selectedEquipment?.value)! - damage)
+                        log.power = damage
+                        log.targetName = selectedTarget?.name
+                        
+                        var attackOrDefend = ""
+                        if actionName == "Attack" {
+                            attackOrDefend = "strikes"
+                        } else {
+                            attackOrDefend = "defends"
+                        }
+                        
+                        let battleDetails = calculateMathDetail(totalStamina: totalStamina, staminaLeft: staminaLeft, damage: damage)
+                        log.detail = "\(selectedTarget?.name ?? "") appeared. \(selectedTarget?.name ?? "") uses \(selectedMove?.name ?? "")(\(selectedMove?.actualName ?? ""). \(character?.name ?? "") \(attackOrDefend) with \(selectedEquipment?.name ?? "") for \(damage) damage! \(battleDetails.0 + battleDetails.1)"
+                        
+                        print("Summary: \(log.detail)")
+                        
+                        //need to incorporate the budgets
+                        
+                        ad.saveContext()
+                    } else {
+                        // show warning that there isn't enough buying power
+                    }
+                }
+                
+                
+            } else {
+                // error with equipment
+            }
             
+        } else {
+            print("There is one or more parameters missing")
         }
     }
     
@@ -297,6 +360,77 @@ class ActionVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource, U
         }
         
         return true
+    }
+    
+    func fetchPlayer() {
+        do {
+            let results = try context.fetch(Character.fetchRequest()) as [Character]
+            character = results.first
+            
+            
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+    
+    
+    func calculateMathDetail(totalStamina: Double, staminaLeft: Double, damage: Double) -> (String, String, Double) {
+        // damage/total stamina = percentage according to whole paycheck,
+        // damage/staminaLeft = percentage according to paycheck left
+        let percentOfTotal = (damage / totalStamina) * 100
+        let percentOfRemaining = (damage / staminaLeft) * 100
+        let newStamina = staminaLeft - damage
+        
+        var battleDetail1 = ""
+        var battleDetail2 = ""
+        
+        if percentOfTotal > 100 {
+            battleDetail1 = "You stumble upon a powerful enemy. You sacrifice much to match its strength but is it worth it?"
+        } else if percentOfTotal > 90 {
+            battleDetail1 = " The enemy is powerful, requiring everything you have."
+        } else if percentOfTotal > 80 {
+            battleDetail1 = "You face a dangerous foe."
+        } else if percentOfTotal > 55 {
+            battleDetail1 = "You might be able to take this guy at full strength one on one."
+        } else if percentOfTotal > 50 {
+            battleDetail1 = "A threat in disguise."
+        } else if percentOfTotal > 25 {
+            battleDetail1 = "More of a match than you thought."
+        } else if percentOfTotal > 10 {
+            battleDetail1 = "Looks easy, but they are quick to surround."
+        } else if percentOfTotal > 5 {
+            battleDetail1 = "Just the enemy to relieve some stress."
+        } else if percentOfTotal > 1 {
+            battleDetail1 = "Every day goon."
+        } else {
+            battleDetail1 = "Did someone say something?"
+        }
+        
+        if percentOfRemaining > 100 {
+            battleDetail2 = "You drop to the ground and pray that there is help coming."
+        } else if percentOfRemaining > 90 {
+            battleDetail2 = "You are beyond exhausted and will feel the pain for days to come even if you manage to survive"
+        } else if percentOfRemaining > 80 {
+            battleDetail2 = "You clinch a close victory as the enemy falls right before you do. Don't worry... someone will find you"
+        } else if percentOfRemaining > 55 {
+            battleDetail2 = "You're not sure if you can stand but at least you're still breathing."
+        } else if percentOfRemaining > 45 {
+            battleDetail2 = "You have maybe one more fight like this left in you..."
+        } else if percentOfRemaining > 25 {
+            battleDetail2 = "You manage to conserve your strength, but keeping at this pace will wear you out."
+        } else if percentOfRemaining > 10 {
+            battleDetail2 = "You can manage a few of these fights now and then, but don't go overboard."
+        } else if percentOfRemaining > 5 {
+            battleDetail2 = "You keep a cool head and take down your opponent with ease."
+        } else if percentOfRemaining > 1 {
+            battleDetail2 = "You let out a mighty laugh as you pounce your puny target"
+        } else {
+            battleDetail2 = "Flexing your muscles, you walk away from an easy victory"
+        }
+        
+        
+        
+       return (battleDetail1, battleDetail2, newStamina)
     }
     
 

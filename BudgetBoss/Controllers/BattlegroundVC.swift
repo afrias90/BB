@@ -73,8 +73,14 @@ class BattlegroundVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if indexPath.section == 0 {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell", for: indexPath) as? SummaryCell {
-//                let item = items[indexPath.row]
-                    cell.configureSummaryCell(summary: testString)
+                    var summary = ""
+                    if firstLog != nil {
+                        summary = (firstLog?.detail)!
+                    } else {
+                        summary = "We can't find any recent record"
+                    }
+                    
+                    cell.configureSummaryCell(summary: summary)
                     return cell
             
             }
@@ -148,6 +154,9 @@ class BattlegroundVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            performSegue(withIdentifier: "logSegue", sender: nil)
+        }
         // selecting actions
         if indexPath.section == 1 {
             let action = actions[indexPath.row]
@@ -187,12 +196,20 @@ class BattlegroundVC: UIViewController, UITableViewDelegate, UITableViewDataSour
 //            }
 //        }
     }
+    override func viewWillAppear(_ animated: Bool) {
+        fetchFirstLog()
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         //first view that can lead to categories (i think)
         // check to see if there are any, if not, population preloadedCategories
+        fetchPreloads()
+        
+    }
+    
+    func fetchPreloads() {
         do {
-           let results = try context.fetch(ObjCategory.fetchRequest()) as [ObjCategory]
+            let results = try context.fetch(ObjCategory.fetchRequest()) as [ObjCategory]
             if results.isEmpty {
                 preloadCategories()
             }
@@ -200,7 +217,42 @@ class BattlegroundVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         } catch let error as NSError {
             print(error)
         }
+        
+        do {
+            let results = try context.fetch(Merchant.fetchRequest()) as [Merchant]
+            if results.count > 0 {
+                
+            } else {
+                preloadTargetList()
+            }
+        } catch let error as NSError {
+            print(error)
+        }
     }
+    
+    var firstLog: Log?
+    func fetchFirstLog() {
+        do {
+            let results = try context.fetch(Log.fetchRequest()) as [Log]
+            if results.count > 0 {
+                firstLog = results.last
+                print("First log: \(firstLog)")
+            } else {
+                
+                
+            }
+            
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+    
+    
+    var preloadedTargets: [String:String] = [
+        "Lord of the Land":"Land Lord",
+        "Glutaneous Vegetation":"Grocery Market",
+        "Electrode":"Electricity"
+    ]
     
     var preloadedCategories = [
     "Mortgage/Rent",
@@ -217,6 +269,20 @@ class BattlegroundVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         //will this save all the new items? yes!
         ad.saveContext()
+    }
+    
+    func preloadTargetList() {
+        var targetList: [Merchant] = []
+        for (name,alias) in preloadedTargets {
+            //create target with name from preloaded targets
+            let target = Merchant(context: context)
+            target.name =  name
+            target.actualName = alias
+            targetList.append(target)
+        }
+        
+        ad.saveContext()
+        
     }
     
     

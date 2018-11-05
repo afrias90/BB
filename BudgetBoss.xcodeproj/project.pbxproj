@@ -10,6 +10,8 @@
 		18094CBE218F890000E9B7B5 /* CatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18094CBD218F890000E9B7B5 /* CatListVC.swift */; };
 		18094CC0218F891B00E9B7B5 /* CatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18094CBF218F891B00E9B7B5 /* CatCell.swift */; };
 		18094CC4218F8DD900E9B7B5 /* EditCatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18094CC3218F8DD900E9B7B5 /* EditCatVC.swift */; };
+		18094CC6218FEF0900E9B7B5 /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18094CC5218FEF0900E9B7B5 /* LogCell.swift */; };
+		18094CC8218FEF3200E9B7B5 /* LogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18094CC7218FEF3200E9B7B5 /* LogVC.swift */; };
 		18112FB5217B7E530015AFB9 /* StaminaTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18112FB4217B7E530015AFB9 /* StaminaTVC.swift */; };
 		18112FB8217E83F30015AFB9 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18112FB7217E83F30015AFB9 /* Settings.swift */; };
 		18188CEE211E327300DE8DB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18188CED211E327300DE8DB5 /* AppDelegate.swift */; };
@@ -50,6 +52,8 @@
 		18094CBD218F890000E9B7B5 /* CatListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatListVC.swift; sourceTree = "<group>"; };
 		18094CBF218F891B00E9B7B5 /* CatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatCell.swift; sourceTree = "<group>"; };
 		18094CC3218F8DD900E9B7B5 /* EditCatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCatVC.swift; sourceTree = "<group>"; };
+		18094CC5218FEF0900E9B7B5 /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
+		18094CC7218FEF3200E9B7B5 /* LogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogVC.swift; sourceTree = "<group>"; };
 		18112FB4217B7E530015AFB9 /* StaminaTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaminaTVC.swift; sourceTree = "<group>"; };
 		18112FB7217E83F30015AFB9 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		18188CEA211E327300DE8DB5 /* BudgetBoss.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BudgetBoss.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -162,6 +166,7 @@
 				18393C99218F573A00065F58 /* EditMoveVC.swift */,
 				18094CBD218F890000E9B7B5 /* CatListVC.swift */,
 				18094CC3218F8DD900E9B7B5 /* EditCatVC.swift */,
+				18094CC7218FEF3200E9B7B5 /* LogVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 				18393C8F218F379300065F58 /* TargetCell.swift */,
 				18393C97218F553400065F58 /* ObjectCell.swift */,
 				18094CBF218F891B00E9B7B5 /* CatCell.swift */,
+				18094CC5218FEF0900E9B7B5 /* LogCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -312,6 +318,7 @@
 				18094CBE218F890000E9B7B5 /* CatListVC.swift in Sources */,
 				187282C1218A7D5F00D557CF /* ActionCell.swift in Sources */,
 				18188CF6211E327300DE8DB5 /* BudgetBoss.xcdatamodeld in Sources */,
+				18094CC8218FEF3200E9B7B5 /* LogVC.swift in Sources */,
 				186311FF2180C1D700624A2F /* BudgetTVC.swift in Sources */,
 				1884457F212510A8002E0932 /* ItemsVC.swift in Sources */,
 				18393C9A218F573A00065F58 /* EditMoveVC.swift in Sources */,
@@ -330,6 +337,7 @@
 				1848F14A21225E050087B184 /* Constants.swift in Sources */,
 				18112FB8217E83F30015AFB9 /* Settings.swift in Sources */,
 				18393C98218F553400065F58 /* ObjectCell.swift in Sources */,
+				18094CC6218FEF0900E9B7B5 /* LogCell.swift in Sources */,
 				1860694A2120CF0100E676C3 /* BudgetCalculation.swift in Sources */,
 				18393C96218F527100065F58 /* MoveListVC.swift in Sources */,
 				187282C5218A83D400D557CF /* EditingCell.swift in Sources */,

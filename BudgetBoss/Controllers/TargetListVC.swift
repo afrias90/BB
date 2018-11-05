@@ -16,11 +16,7 @@ class TargetListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     var selectedTarget: Merchant?
     var targetList: [Merchant] = []
-    var preloadedTargets: [String:String] = [
-        "Lord of the Land":"Land Lord",
-        "Glutaneous Vegetation":"Grocery Market",
-        "Electrode":"Electricity"
-    ]
+    
     
     
 
@@ -90,26 +86,14 @@ class TargetListVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             if results.count > 0 {
                 targetList = results
             } else {
-                preloadTargetList()
+                //preloadTargetList()
             }
         } catch let error as NSError {
             print(error)
         }
     }
     
-    func preloadTargetList() {
-        
-        for (name,alias) in preloadedTargets {
-            //create target with name from preloaded targets
-            let target = Merchant(context: context)
-            target.name =  name
-            target.actualName = alias
-            targetList.append(target)
-        }
-        
-        ad.saveContext()
-        
-    }
+    
     
 
 }

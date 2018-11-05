@@ -95,7 +95,7 @@ class ItemCell: UITableViewCell {
             valueLabel.textColor = #colorLiteral(red: 0.7910651967, green: 0.0001520840534, blue: 0.1492383157, alpha: 1)
         }
         if item.category == "asset" {
-            if item.value > 0 {
+            if item.value >= 0 {
             categoryImage.image = UIImage(named: "Power Symbol")
             valueLabel.text = String(format: "%0.2f", item.value)
             valueLabel.textColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
