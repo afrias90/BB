@@ -27,6 +27,7 @@
         <attribute name="itemName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="itemNewPower" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="mathDetail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="moveName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="power" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="targetName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="targetNewPower" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -51,10 +52,10 @@
     </entity>
     <elements>
         <element name="Character" positionX="2088" positionY="-1017" width="128" height="150"/>
-        <element name="Item" positionX="1890" positionY="-1026" width="128" height="163"/>
-        <element name="Log" positionX="2286" positionY="-1008" width="128" height="210"/>
+        <element name="Item" positionX="1890" positionY="-1026" width="128" height="165"/>
+        <element name="Log" positionX="2286" positionY="-1008" width="128" height="225"/>
         <element name="Merchant" positionX="2097" positionY="-1161" width="128" height="118"/>
-        <element name="ObjCategory" positionX="1740.015625" positionY="-1139.55859375" width="128" height="75"/>
         <element name="Move" positionX="1912.8828125" positionY="-1159.66796875" width="128" height="105"/>
+        <element name="ObjCategory" positionX="1740.015625" positionY="-1139.55859375" width="128" height="75"/>
     </elements>
 </model>

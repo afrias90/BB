@@ -16,7 +16,7 @@ class BattlegroundVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     var actions = [
     "Attack",
     "Defend",
-    "Upgrade",
+    "Smith",
     "Cleanse",
     "Sickness",
     "Energy"
@@ -93,6 +93,7 @@ class BattlegroundVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                     
             
         } else if indexPath.section == 2 {
+                    
                     if let cell = tableView.dequeueReusableCell(withIdentifier: "editingCell", for: indexPath) as? EditingCell {
                         let list = lists[indexPath.row]
                         cell.configureListCell(list: list)

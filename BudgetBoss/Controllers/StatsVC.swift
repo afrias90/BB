@@ -13,7 +13,6 @@ class StatsVC: UIViewController, UINavigationControllerDelegate {
     
     //instantiating settings here? correct/okay method? others?
     var settings: Settings!
-    
     var character: Character?
     
     @IBOutlet weak var nameLbl: UILabel!

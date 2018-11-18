@@ -30,12 +30,12 @@ class ItemCell: UITableViewCell {
 //            }
 //        }
     
-        @IBInspectable var topColor: UIColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1) {
+        @IBInspectable var topColor: UIColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1) {
             didSet {
                 self.setNeedsLayout()
             }
         }
-        @IBInspectable var bottomColor: UIColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1) {
+        @IBInspectable var bottomColor: UIColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1) {
             didSet {
                 self.setNeedsLayout()
             }
