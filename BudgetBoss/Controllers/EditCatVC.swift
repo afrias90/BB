@@ -12,19 +12,26 @@ class EditCatVC: UIViewController, UITextFieldDelegate {
     
     var catToEdit: ObjCategory?
     @IBOutlet weak var createCatButton: UIButton!
-    
     @IBOutlet weak var categoryNameTF: UITextField!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let closeTouch = UITapGestureRecognizer(target: self, action: #selector(EditMoveVC.closeTap(_:)))
+        view.addGestureRecognizer(closeTouch)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        deleteButton.isEnabled = false
         if catToEdit != nil {
             setupCat()
+        } else {
+            title = "Create Category"
         }
+        
         createCatButtonSetup()
         
     }
@@ -39,6 +46,24 @@ class EditCatVC: UIViewController, UITextFieldDelegate {
             print("Can't save blank category name")
         }
     }
+    
+    @IBAction func deleteTapped(_ sender: Any) {
+        let ac = UIAlertController(title: "Delete Category", message: "Are you were sure you want to delete category?", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "DELETE", style: .destructive, handler: { Void in
+            
+            if self.catToEdit != nil {
+                context.delete(self.catToEdit!)
+                ad.saveContext()
+            }
+            
+            self.navigationController?.popViewController(animated: true)
+        }))
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        ac.addAction(cancelAction)
+        self.present(ac, animated: true, completion: nil)
+    }
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if categoryNameTF.isFirstResponder {
@@ -69,6 +94,8 @@ class EditCatVC: UIViewController, UITextFieldDelegate {
     
     func setupCat() {
         categoryNameTF.text = catToEdit?.name
+        deleteButton.isEnabled = true
+        title = "Edit"
     }
     
     func createCatButtonSetup() {
@@ -77,6 +104,10 @@ class EditCatVC: UIViewController, UITextFieldDelegate {
         } else {
             createCatButton.isHidden = false
         }
+    }
+    
+    @objc func closeTap(_ recognizer: UITapGestureRecognizer) {
+        view.endEditing(true)
     }
     
 }

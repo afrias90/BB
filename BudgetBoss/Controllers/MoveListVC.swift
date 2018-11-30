@@ -16,13 +16,7 @@ class MoveListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var selectedMove: Move?
     var moveList: [Move] = []
-    var preloadedMoves: [String:String] = [
-        "Chains of Comfort":"Rent",
-        "Thunderbolt":"Electric Bill",
-        "High Fructosity":"Candy",
-        "Knowledge Calamity":"Internet Bill",
-        "Endless Menu":"Lunch"
-    ]
+    
     
 
     override func viewDidLoad() {
@@ -84,53 +78,16 @@ class MoveListVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if results.count > 0 {
                 moveList = results
             } else {
-                preloadMoveList()
+//                preloadMoveList()
             }
         } catch let error as NSError {
             print("MoveListVC: \(error)")
         }
     }
     
-    func preloadMoveList() {
-        
-        for (name, alias) in preloadedMoves {
-            let move = Move(context: context)
-            move.name = name
-            move.actualName = alias
-            moveList.append(move)
-        }
-        assignCategoriesToMoves()
-//        ad.saveContext()
-    }
     
-    func assignCategoriesToMoves() {
-        do {
-            let results = try context.fetch(ObjCategory.fetchRequest()) as [ObjCategory]
-            for cat in results {
-                for move in moveList {
-                    if cat.name == "Mortgage/Rent" && move.actualName == "Rent" {
-                        cat.addToMove(move)
-                    }
-                    if cat.name == "Food/Dining" && move.actualName == "Lunch" {
-                        cat.addToMove(move)
-                    }
-                    if cat.name == "Utility" && move.actualName == "Electric Bill" {
-                        cat.addToMove(move)
-                    }
-                    if cat.name == "Internet" && move.actualName == "Internet Bill" {
-                        cat.addToMove(move)
-                    }
-                    if cat.name == "Junk Food" && move.actualName == "Candy" {
-                        cat.addToMove(move)
-                    }
-                }
-            }
-            
-        } catch let error as NSError {
-            print(error)
-        }
-        ad.saveContext()
-    }
+    
+    
   
 //    "Mortgage/Rent",
 //    "Food/Dining",

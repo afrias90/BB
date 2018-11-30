@@ -53,10 +53,8 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
     @IBOutlet weak var damagePowerLabel: UILabel!
     @IBOutlet weak var powerInputTF: UITextField!
     //picker
-    
     @IBOutlet weak var picker: UIPickerView!
     @IBOutlet weak var proceedButton: UIButton!
-    
     //constraints
     @IBOutlet weak var item1TFWidth: NSLayoutConstraint!
     @IBOutlet weak var item1LabelWidth: NSLayoutConstraint!
@@ -106,8 +104,8 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
             secondItemViewHeight.constant = 0
             secondItemViewTop.constant = 0
             item1Label.text = "Equipment"
-            input1TF.text = "Target"
-            input2TF.text = "Move"
+            input1TF.placeholder = "Target"
+            input2TF.placeholder = "Move"
             damagePowerLabel.text = "Damage:"
             
             if actionName == "Attack" {
@@ -115,8 +113,6 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
             } else {
                 proceedButton.setImage(UIImage(named: "Defense"), for: .normal)
             }
-            //fetches here
-            
             fetchEquipment()
             fetchTargets()
             fetchMoves()
@@ -139,8 +135,8 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
             item2Button.isEnabled = false
             item2TF.isEnabled = false
             item2TF.text = "Select equipment"
+            item2TF.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
             damagePowerLabel.text = "Power Tansfer:"
-            
             //will fetch assets only
             fetchAssetEquipment()
             
@@ -170,8 +166,6 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
             
             secondItemViewHeight.constant = 0
             secondItemViewTop.constant = 0
-            //input1ViewHeight.constant = 0
-            //input1ViewTop.constant = 0
             input2ViewHeight.constant = 0
             input2ViewTop.constant = 0
             
@@ -188,7 +182,6 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
         if actionName == "Energy" {
             item1TFWidth.constant = item1LabelWidth.constant
             item1LabelWidth.constant = 0
-            
             secondItemViewHeight.constant = 0
             secondItemViewTop.constant = 0
             
@@ -200,29 +193,21 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
             fetchMoves()
             
             proceedButton.setImage(UIImage(named: "Energy"), for: .normal)
-            
         }
-        
-        
-        
     }
     
     
     //buttons Tapped
     //items 1 and 2
     @IBAction func item1ButtonTapped(_ sender: Any) {
-        //active for all, but items should be regulated during action setup
-        //TF1 in sickness and energy
-        
         if actionName == "Smith" {
             //reset item 2
             item2Button.isEnabled = false
             item2TF.isEnabled = false
-            item2TF.text = "Select power source"
+            item2TF.text = "Select equipment"
+            item2TF.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
             valueLabel2.text = "NA"
-            
         }
-        
         if picker.isHidden {
             pickerChoice = "equipment"
             item1Label.textColor = #colorLiteral(red: 0, green: 0.2883095741, blue: 0.6653674245, alpha: 1)
@@ -242,9 +227,7 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
                 item1Label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
             }
         }
-        
     }
-    
     
     @IBAction func item2ButtonTapped(_ sender: Any) {
         //smith and cleanse only
@@ -269,7 +252,6 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
         }
 
     }
-    
     /////////////////
     //input1 and 2
     @IBAction func input1ButtonTapped(_ sender: Any) {
@@ -306,7 +288,6 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
                 }
             }
         }
-        
     }
     
     @IBAction func input2ButtonTapped(_ sender: Any) {
@@ -335,14 +316,108 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
         picker.isHidden = false
         view.endEditing(true)
     }
-    
     ////////
     ////////
     ///////
     //process
+    
+    func createNewTargetFromProcess() -> Bool {
+        //target from input1
+        let newTargetName = input1TF.text!
+        var newTarget = true
+        for target in targets {
+            if newTargetName.lowercased() == target.name?.lowercased() {
+                newTarget = false
+            }
+        }
+        if newTarget {
+            let target = Merchant(context: context)
+            target.name = newTargetName
+            selectedTarget = target
+            return true
+            //character.addToItem(debt)
+        } else {
+            //already exists
+            return false
+        }
+    }
+    
+    func createNewMoveFromProcess() -> Bool {
+        //move from input2
+        let newMoveName = input2TF.text!
+        var newMove = true
+        for move in moves {
+            if newMoveName == move.name {
+                newMove = false
+            }
+        }
+        if newMove {
+            let move = Move(context: context)
+            move.name = newMoveName
+            selectedMove = move
+            return true
+            //character.addToItem(debt)
+        } else {
+            //already exists
+            return false
+        }
+    }
+    
+    func createNewItem(itemName: String, category: String) -> Bool {
+        //sickness = debt
+        //energy = asset
+        
+        let newItemName = itemName
+        var newItem = true
+        //both found in equipment
+        for item in equipment {
+            if newItemName.lowercased() == item.name?.lowercased() {
+                newItem = false
+            }
+        }
+        if newItem {
+            let item = Item(context: context)
+            item.name = newItemName
+            item.main = false
+            if category == "debt" {
+                item.debt = true
+                item.category = category
+            } else if category == "asset" {
+                item.debt = false
+                item.category = category
+            }
+            if actionName == "Smith" {
+                selectedSecondary = item
+            } else {
+                selectedEquipment = item
+            }
+            character.addToItem(item)
+            return true
+        } else {
+            //already exists
+            print("Item name already exists")
+            return false
+        }
+    }
+    
     @IBAction func proceedTapped(_ sender: Any) {
         if actionName == "Attack" || actionName == "Defend" {
-            if selectedEquipment != nil && selectedTarget != nil && selectedMove != nil && powerInputTF.text != "" {
+            if selectedEquipment != nil && (selectedTarget != nil || input1TF.text != "") && (selectedMove != nil || input2TF.text != "") && powerInputTF.text != "" {
+                
+                if selectedTarget == nil {
+                    if !createNewTargetFromProcess() {
+                        //if false, return
+                        print("(Att/def) Target name already exists")
+                        return
+                    }
+                }
+                
+                if selectedMove == nil {
+                    if !createNewMoveFromProcess() {
+                        print("(Att/def) Move name already exists")
+                        return
+                    }
+                }
                 
                 let sEquipment = selectedEquipment!
                 let sTarget = selectedTarget!
@@ -368,12 +443,17 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
                     }
                     
                     //stamina depleted
+                    ////
                     let totalStamina = UserDefaults.standard.double(forKey: "TotalStamina")
-                    let staminaLeft = character.stamina
                     character.stamina += damage
+                    //character stamina is stamina used
+                    let staminaLeft = totalStamina - character.stamina
+                    
                     //calculate battle details
                     let bdm = BattleDetailModel()
-                    let battleDetails = bdm.calculateMathDetail(totalStamina: totalStamina, staminaLeft: staminaLeft, damage: damage)
+                    print("damage: \(damage), totalstamina: \(totalStamina), staminaleft: \(staminaLeft)")
+                    let battleDetails = bdm.calculateMathDetail(totalStamina: totalStamina, staminaLeft: staminaLeft, damage: damage, targetName: sTarget.name!)
+                    
                     //create the log
                     let log = ActionModel.actionModel.createLogForBudgetAction(equipment: sEquipment, target: sTarget, move: sMove, character: character, damage: damage, action: actionTaken, bd1: battleDetails.0, bd2: battleDetails.1)
                     print(log)
@@ -384,30 +464,21 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
                 } else {
                     print("Not enough funds")
                 }
-                
-                
-                
             }
-            
         }
         ////////////////////////////////////////////////Smith
         if actionName == "Smith" {
-        
             if selectedEquipment != nil && (selectedSecondary != nil || item2TF.text != "") && powerInputTF.text != ""{
                 //money is not saved if it is transfered to your main spending account
                 //main is not added to secondaryEquipment
-                
+                var newItemCreated = false
                 if selectedSecondary == nil {
-                    let newSecondaryItem = Item(context: context)
-                    newSecondaryItem.name = item2TF.text!
-                    newSecondaryItem.main = false
-                    newSecondaryItem.value = 0
-                    newSecondaryItem.category = "asset"
-                    character.addToItem(newSecondaryItem)
-                    //new item becomes selectedSecondary
-                    selectedSecondary = newSecondaryItem
+                    if !createNewItem(itemName: item2TF.text!, category: "asset") {
+                        print("(Smith) Move name already exists")
+                        return
+                    }
+                    newItemCreated = true
                 }
-                
                 let sEquipment = selectedEquipment!
                 let sSecondary = selectedSecondary!
                 let damage = Double(powerInputTF.text!)!
@@ -421,15 +492,17 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
                     //actions deplete stamina
                     //even for saving, but doesnt effect budget
                     let totalStamina = UserDefaults.standard.double(forKey: "TotalStamina")
-                    let staminaLeft = character.stamina
                     character.stamina += damage
+                    //character stamina is stamina used
+                    let staminaLeft = totalStamina - character.stamina
                     
+                    
+                    let bdm = BattleDetailModel()
+                    let smithDetails = bdm.calculateSmithDetail(totalStamina: totalStamina, staminaLeft: staminaLeft, damage: damage, newItem: newItemCreated)
                     //SmithDetails to be made and incorporate stamina
-                    let log = ActionModel.actionModel.createLogForSmithAction(equipment: sEquipment, secondary: sSecondary, character: character, damage: damage, action: actionTaken, bd1: nil, bd2: nil)
+                    let log = ActionModel.actionModel.createLogForSmithAction(equipment: sEquipment, secondary: sSecondary, character: character, damage: damage, newItem: newItemCreated, action: actionTaken, bd1: smithDetails)
                     
                     ad.saveContext()
-                    print("smith log: \(log)")
-                    
                     performSegue(withIdentifier: "receiptSegue", sender: log)
                     
                 }
@@ -450,8 +523,6 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
                     character.stamina += power
                     
                     let log = ActionModel.actionModel.createLogForCleanseAction(equipment: sEquipment, secondary: sSecondary, character: character, damage: power, action: actionTaken, bd1: nil, bd2: nil)
-                    
-                    print("cleanse log: \(log)")
                     ad.saveContext()
                     
                     performSegue(withIdentifier: "receiptSegue", sender: log)
@@ -463,59 +534,32 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
         ////////////////////////////////////////// Sickness
         if actionName == "Sickness" {
             if (selectedEquipment != nil || item1TF.text != "") && (selectedTarget != nil || input1TF.text != "") && powerInputTF.text != "" {
-                
-                if selectedEquipment == nil {
-                    let newDebtName = item1TF.text!
-                    var newDebt = true
-                    for debt in equipment {
-                        if newDebtName == debt.name {
-                            newDebt = false
-                        }
-                    }
-                    if newDebt {
-                        let debt = Item(context: context)
-                        debt.name = newDebtName
-                        debt.debt = true
-                        debt.category = "debt"
-                        debt.main = false
-                        selectedEquipment = debt
-                    } else {
-                        //already exists
-                        print("Debt name already exists")
-                        return
-                    }
-                }
-                
-                print("passed towards selected target")
-                
-                if selectedTarget == nil {
-                    //check targetname against target narmes
-                    let newTargetName = input1TF.text!
-                    var newtarget = true
-                    for target in targets {
-                        if newTargetName == target.name {
-                            newtarget = false
-                        }
-                    }
-                    //if targetName is still true... continue
-                    if newtarget {
-                        let target = Merchant(context: context)
-                        target.name = newTargetName
-                        selectedTarget = target
-                    } else {
-                        //target name already exists
-                        print("target name already exists")
-                        return
-                    }
-                }
-                
                 let power = Double(powerInputTF.text!)!
                 let actionTaken = actionName!
                 
+                if selectedEquipment == nil {
+                    if !createNewItem(itemName: item1TF.text!, category: "debt") {
+                        return
+                    }
+                    selectedEquipment?.originalVal = power
+                }
+ 
+                if selectedTarget == nil {
+                    if !createNewTargetFromProcess() {
+                        print("(Att/def) Target name already exists")
+                        return
+                    }
+                }
+                
+                
+                
+                let sEquipment = selectedEquipment!
+                sEquipment.value += power
+                
                 if selectedEquipment != nil && selectedTarget != nil {
+                    selectedEquipment?.value += power
                     let log = ActionModel.actionModel.createLogForSickness(debt: selectedEquipment!, source: selectedTarget!, damage: power, action: actionTaken)
-                    print("sickness log: \(log)")
-                    
+                    ad.saveContext()
                     performSegue(withIdentifier: "receiptSegue", sender: log)
                     
                 }
@@ -526,85 +570,30 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
             if (selectedEquipment != nil || item1TF.text != "") && (selectedTarget != nil || input1TF.text != "") && (selectedMove != nil || input2TF.text != "") && powerInputTF.text != "" {
                 
                 if selectedEquipment == nil {
-                    let newDebtName = item1TF.text!
-                    var newDebt = true
-                    for debt in equipment {
-                        if newDebtName == debt.name {
-                            newDebt = false
-                        }
-                    }
-                    if newDebt {
-                        let debt = Item(context: context)
-                        debt.name = newDebtName
-                        debt.debt = true
-                        debt.category = "debt"
-                        debt.main = false
-                        selectedEquipment = debt
-                    } else {
-                        //already exists
-                        print("Debt name already exists")
+                    if !createNewItem(itemName: item1TF.text!, category: "asset") {
                         return
                     }
                 }
-                
-                print("passed towards selected target")
-                
                 if selectedTarget == nil {
-                    //check targetname against target narmes
-                    let newTargetName = input1TF.text!
-                    var newtarget = true
-                    for target in targets {
-                        if newTargetName == target.name {
-                            newtarget = false
-                        }
-                    }
-                    //if targetName is still true... continue
-                    if newtarget {
-                        let target = Merchant(context: context)
-                        target.name = newTargetName
-                        selectedTarget = target
-                    } else {
-                        //target name already exists
-                        print("target name already exists")
+                    if !createNewTargetFromProcess() {
                         return
                     }
                 }
-                
                 if selectedMove == nil {
-                    //check targetname against target narmes
-                    let newMovetName = input2TF.text!
-                    var newMove = true
-                    for move in moves {
-                        if newMovetName == move.name {
-                            newMove = false
-                        }
-                    }
-                    //if targetName is still true... continue
-                    if newMove {
-                        let move = Move(context: context)
-                        move.name = newMovetName
-                        selectedMove = move
-                    } else {
-                        //target name already exists
-                        print("move name already exists")
+                    if !createNewMoveFromProcess() {
                         return
                     }
                 }
-                
                 let power = Double(powerInputTF.text!)!
                 let actionTaken = actionName!
-                
                 if selectedEquipment != nil && selectedTarget != nil && selectedMove != nil {
                     let log = ActionModel.actionModel.createLogForEnergy(equipment: selectedEquipment!, source: selectedTarget!, move: selectedMove!, damage: power, action: actionTaken)
-                    print("energy log: \(log)")
-                    
+ 
+                    ad.saveContext()
                     performSegue(withIdentifier: "receiptSegue", sender: log)
-                    
                 }
-                
             }
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -616,9 +605,6 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
             }
         }
     }
-    
-    
-    
     
     ////
     //Picker
@@ -633,7 +619,7 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
             //smith handles own asset fetching
             //
             if !equipment.isEmpty {
-                return equipment.count
+                return equipment.count + 1
             } else {
                 return 1
             }
@@ -650,7 +636,7 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
             }
             if actionName == "Cleanse" {
                 if !secondaryEquipment.isEmpty {
-                    return secondaryEquipment.count
+                    return secondaryEquipment.count + 1
                 } else {
                     return 1
                 }
@@ -658,15 +644,15 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
         }
         
         if pickerChoice == "targets" {
-            if actionName == "Sickness" || actionName == "Energy" {
-                if !targets.isEmpty {
-                    //option to add new
-                    return targets.count + 1
-                }
-            }
-            
+//            if actionName == "Sickness" || actionName == "Energy" {
+//                if !targets.isEmpty {
+//                    //option to add new
+//                    return targets.count + 1
+//                }
+//            }
+//
             if !targets.isEmpty {
-                return targets.count
+                return targets.count + 1
             } else {
                 return 1
             }
@@ -675,13 +661,13 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
             if actionName == "Energy" {
                 if !moves.isEmpty {
                     return moves.count + 1
+                } else {
+                    return 1
                 }
-            } else {
-                return 1
             }
             
             if !moves.isEmpty {
-                return moves.count
+                return moves.count + 1
             } else {
                 return 1
             }
@@ -698,6 +684,14 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
             
             if !equipment.isEmpty {
                 var equipmentNames: [String] = []
+                if actionName == "Energy" {
+                    equipmentNames.append("New Item")
+                } else if actionName == "Sickness" {
+                    equipmentNames.append("New Debt")
+                } else {
+                    equipmentNames.append("Select Equipment")
+                }
+                
                 for item in equipment {
                     let name = item.name
                     equipmentNames.append(name!)
@@ -714,7 +708,10 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
                 var secondaryEquipNames: [String] = []
                 if actionName == "Smith" {
                     secondaryEquipNames.append("New Item")
+                } else if actionName == "Cleanse" {
+                    secondaryEquipNames.append("Select Debt")
                 }
+                
                 for item in secondaryEquipment {
                     let name = item.name
                     secondaryEquipNames.append(name!)
@@ -734,10 +731,7 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
             if !targets.isEmpty {
                 print("we have targets")
                 var targetNames: [String] = []
-                
-                if actionName == "Sickness" || actionName == "Energy" {
-                    targetNames.append("New Target")
-                }
+                targetNames.append("New Target")
                 for target in targets {
                     let name = target.name
                     targetNames.append(name!)
@@ -746,13 +740,10 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
             }
         }
         if pickerChoice == "moves" {
-            if moves.isEmpty == false {
+            if !moves.isEmpty {
                 print("we have moves")
                 var moveNames: [String] = []
-                if actionName == "Energy" {
                     moveNames.append("New Move")
-                }
-                
                 for move in moves {
                     let name = move.name
                     moveNames.append(name!)
@@ -770,32 +761,48 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
         //will need to fix for selection of second item
         if actionName == "Attack" || actionName == "Defend" {
             if pickerChoice == "equipment" {
+                if row > 0 {
+                    selectedEquipment = equipment[row - 1]
+                    item1Label.textColor = UIColor.black
+                    item1Label.text = selectedEquipment?.name
+                    valueLabel1.text = String(format: "%0.2f", (selectedEquipment?.value)!)
+                    if selectedEquipment!.value < 0.0 {
+                        itemImage1.image = UIImage(named: "Affliction")
+                    } else {
+                        itemImage1.image = UIImage(named: "Power")
+                    }
+                    if selectedEquipment!.category == "credit" {
+                        magicLabel1.text = String(format: "%0.2f", selectedEquipment!.durability)
+                    } else {
+                        magicLabel1.text = "NA"
+                    }
+                    pickerView.isHidden = true
+                } else {
+                    //nothing
+                }
                 
-                selectedEquipment = equipment[row]
-                item1Label.textColor = UIColor.black
-                item1Label.text = selectedEquipment?.name
-                valueLabel1.text = String(format: "%0.2f", (selectedEquipment?.value)!)
-                if selectedEquipment!.value < 0.0 {
-                    itemImage1.image = UIImage(named: "Affliction")
-                } else {
-                    itemImage1.image = UIImage(named: "Power")
-                }
-                if selectedEquipment!.category == "credit" {
-                    magicLabel1.text = String(format: "%0.2f", selectedEquipment!.durability)
-                } else {
-                    magicLabel1.text = "NA"
-                }
-                pickerView.isHidden = true
+                
+                
             }
             if pickerChoice == "targets" {
-                selectedTarget = targets[row]
-                //selected target shows up in TF
-                input1TF.text = selectedTarget?.name
+                if row > 0 {
+                    selectedTarget = targets[row - 1]
+                    //selected target shows up in TF
+                    input1TF.text = selectedTarget?.name
+                    
+                } else {
+                    input1TF.becomeFirstResponder()
+                }
                 pickerView.isHidden = true
             }
             if pickerChoice == "moves" {
-                selectedMove = moves[row]
-                input2TF.text = selectedMove?.name
+                if row > 0 {
+                    selectedMove = moves[row - 1]
+                    input2TF.text = selectedMove?.name
+                    
+                } else {
+                    input2TF.becomeFirstResponder()
+                }
                 pickerView.isHidden = true
             }
         }
@@ -804,36 +811,38 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
             //item 1 can only be positive, it is not an upgrade/saving if you use credit (fake money) or increase debt
             //will need a custom fetch then
             if pickerChoice == "equipment" {
-                
-                selectedEquipment = equipment[row]
-                item1Label.textColor = UIColor.black
-                item1Label.text = selectedEquipment?.name
-                valueLabel1.text = String(format: "%0.2f", (selectedEquipment?.value)!)
-                
-                //secondaryEquipment reset
-                secondaryEquipment = []
-                selectedSecondary = nil
-                item2Button.isEnabled = true
-                item2TF.isEnabled = true
-                item2TF.text = ""
-                item2TF.placeholder = "New item?"
-                
-                //secondary equipment equals whatever is left over
-                for item in equipment {
-                    //is it the same item
-                    //secondary item is to save, adding to main item (spending) is not saving
-                    if item !== selectedEquipment && item.main == false {
-                        secondaryEquipment.append(item)
-                        print("item \(item) appended to secondary equipment")
+                if row > 0 {
+                    selectedEquipment = equipment[row - 1]
+                    
+                    item1Label.textColor = UIColor.black
+                    item1Label.text = selectedEquipment?.name
+                    valueLabel1.text = String(format: "%0.2f", (selectedEquipment?.value)!)
+                    
+                    //secondaryEquipment reset
+                    secondaryEquipment = []
+                    selectedSecondary = nil
+                    item2Button.isEnabled = true
+                    item2TF.isEnabled = true
+                    item2TF.text = ""
+                    item2TF.placeholder = "New item?"
+                    item2TF.textColor = UIColor.black
+                    
+                    //secondary equipment equals whatever is left over
+                    for item in equipment {
+                        //is it the same item
+                        //secondary item is to save, adding to main item (spending) is not saving
+                        if item !== selectedEquipment && item.main == false {
+                            secondaryEquipment.append(item)
+                            print("item \(item) appended to secondary equipment")
+                        }
                     }
+                pickerView.isHidden = true
+                } else {
+                  //nothing
                 }
                 //enable secondary button/tf
                 //tf should read 'select power source/equipment'
                 
-                pickerView.isHidden = true
-                
-                
-        
             }
             if pickerChoice == "secondaryEquipment" {
                 if row > 0 {
@@ -856,55 +865,60 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
         }
         if actionName == "Cleanse" {
             if pickerChoice == "equipment" {
-                
-                selectedEquipment = equipment[row]
-                item1Label.textColor = UIColor.black
-                item1Label.text = selectedEquipment?.name
-                valueLabel1.text = String(format: "%0.2f", (selectedEquipment?.value)!)
-                if selectedEquipment!.value < 0.0 {
-                    itemImage1.image = UIImage(named: "Affliction")
+                if row > 0 {
+                    selectedEquipment = equipment[row - 1]
+                    item1Label.textColor = UIColor.black
+                    item1Label.text = selectedEquipment?.name
+                    valueLabel1.text = String(format: "%0.2f", (selectedEquipment?.value)!)
+                    if selectedEquipment!.value < 0.0 {
+                        itemImage1.image = UIImage(named: "Affliction")
+                    } else {
+                        itemImage1.image = UIImage(named: "Power")
+                    }
+                   
+                    pickerView.isHidden = true
                 } else {
-                    itemImage1.image = UIImage(named: "Power")
+                    
                 }
-//                if selectedEquipment!.category == "credit" {
-//                    magicLabel1.text = String(format: "%0.2f", selectedEquipment!.durability)
-//                } else {
-//                    magicLabel1.text = "NA"
-//                }
-                pickerView.isHidden = true
             }
             
             if pickerChoice == "secondaryEquipment" {
-                
-                selectedSecondary = secondaryEquipment[row]
-                item2Label.textColor = UIColor.black
-                item2Label.text = selectedSecondary?.name
-                if selectedSecondary?.category == "credit" {
-                    magicLabel2.text = String(format: "%0.2f", (selectedSecondary?.durability)!)
+                if row > 0 {
+                    selectedSecondary = secondaryEquipment[row - 1]
+                    item2Label.textColor = UIColor.black
+                    item2Label.text = selectedSecondary?.name
+                    if selectedSecondary?.category == "credit" {
+                        magicLabel2.text = String(format: "%0.2f", (selectedSecondary?.durability)!)
+                    } else {
+                        magicLabel2.text = "NA"
+                    }
+                    valueLabel2.text = String(format: "%0.2f", (selectedSecondary?.value)!)
+                    
+                    
+                    
+                    pickerView.isHidden = true
                 } else {
-                    magicLabel2.text = "NA"
+                    
                 }
-                valueLabel2.text = String(format: "%0.2f", (selectedSecondary?.value)!)
-                
-                
-                
-                pickerView.isHidden = true
             }
         }
         if actionName == "Sickness" {
             //only one picker
             if pickerChoice == "equipment" {
-                selectedEquipment = equipment[row]
-                item1TF.text = selectedEquipment?.name
-                if selectedEquipment?.category == "credit" {
-                    magicLabel1.text = String(format: "%0.2f", (selectedEquipment?.durability)!)
+                if row > 0 {
+                    selectedEquipment = equipment[row - 1]
+                    item1TF.text = selectedEquipment?.name
+                    if selectedEquipment?.category == "credit" {
+                        magicLabel1.text = String(format: "%0.2f", (selectedEquipment?.durability)!)
+                    } else {
+                        magicLabel1.text = "NA"
+                    }
+                    valueLabel1.text = String(format: "%0.2f", (selectedEquipment?.value)!)
+                    
+                    pickerView.isHidden = true
                 } else {
-                    magicLabel1.text = "NA"
+                    item1TF.becomeFirstResponder()
                 }
-                valueLabel1.text = String(format: "%0.2f", (selectedEquipment?.value)!)
-                
-                pickerView.isHidden = true
-                
             }
             
             if pickerChoice == "targets" {
@@ -927,12 +941,16 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
         if actionName == "Energy" {
             if pickerChoice == "equipment" {
                 //should only be assets
-                selectedEquipment = equipment[row]
-                item1TF.text = selectedEquipment?.name
-                valueLabel1.text = String(format: "%0.2f", (selectedEquipment?.value)!)
-                magicLabel1.text = "NA"
-                
-                pickerView.isHidden = true
+                if row > 0 {
+                    selectedEquipment = equipment[row - 1]
+                    item1TF.text = selectedEquipment?.name
+                    valueLabel1.text = String(format: "%0.2f", (selectedEquipment?.value)!)
+                    magicLabel1.text = "NA"
+                    
+                    pickerView.isHidden = true
+                } else {
+                    item1TF.becomeFirstResponder()
+                }
             }
             
             if pickerChoice == "targets" {
@@ -965,6 +983,7 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
                 }
             }
         }
+        print("we have selected equipment: \(selectedEquipment)")
     }
     
     
@@ -1053,6 +1072,17 @@ class ActionVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, 
         }
         if input1TF.isFirstResponder {
             input1TF.text = ""
+            selectedTarget = nil
+        }
+        if item2TF.isFirstResponder {
+            item2TF.text = ""
+            if actionName == "Smith" {
+                selectedSecondary = nil
+            }
+            
+        }
+        if input2TF.isFirstResponder {
+            input2TF.text = ""
             selectedTarget = nil
         }
         

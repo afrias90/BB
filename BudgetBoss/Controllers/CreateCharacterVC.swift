@@ -9,15 +9,33 @@
 import UIKit
 import CoreData
 
-class CreateCharacterVC: UIViewController, UITextFieldDelegate {
+class CreateCharacterVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    
 
     @IBOutlet weak var nameTxt: UITextField!
     @IBOutlet weak var paycheckTxt: UITextField!
+    @IBOutlet weak var classNameButton: UIButton!
+    @IBOutlet weak var classPicker: UIPickerView!
+    
+    let characterClass = [
+    "Choose Class",
+    "Watchman",
+    "Fighter",
+    "Guardian",
+    "Blacksmith",
+    "Cursed Warrior",
+    "Jack of all Trades"
+    ]
+    var selectedClass = ""
+    
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        classPicker.delegate = self
+        classPicker.dataSource = self
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(CreateCharacterVC.handleTap))
         view.addGestureRecognizer(tap)
@@ -28,13 +46,23 @@ class CreateCharacterVC: UIViewController, UITextFieldDelegate {
         spinner.isHidden = true
         
     }
+    
+    @IBAction func chooseClassTapped(_ sender: Any) {
+        if classPicker.isHidden {
+            classPicker.isHidden = false
+            view.endEditing(true)
+        } else {
+            classPicker.isHidden = true
+        }
+    }
+    
 
    
     @IBAction func createPressed(_ sender: Any) {
         
         //guard let name = nameTxt.text, name != "" else {return}
         
-        if paycheckTxt.text != "", nameTxt.text != "", let name = nameTxt.text {
+        if paycheckTxt.text != "", nameTxt.text != "", let name = nameTxt.text, selectedClass != "" {
 //            spinner.isHidden = false
 //            spinner.startAnimating()
             let stamina = Double(paycheckTxt.text!)!
@@ -56,6 +84,7 @@ class CreateCharacterVC: UIViewController, UITextFieldDelegate {
     }
     
     func createUser(name: String, stamina: Double, completion: @escaping CompletionHandler) {
+        
         let character = Character(context: context)
         character.name = name
         
@@ -64,7 +93,8 @@ class CreateCharacterVC: UIViewController, UITextFieldDelegate {
         //total stamina (pay day amount) should be added to defaults, and can be changed when a new payday is made
         UserDefaults.standard.set(stamina, forKey: "TotalStamina")
         
-        character.category = "Cursed Warrior"
+        //default for now
+        character.charClass = selectedClass
         
         let mainItem = Item(context: context)
         mainItem.main = true
@@ -77,6 +107,7 @@ class CreateCharacterVC: UIViewController, UITextFieldDelegate {
         //print("\(character.name, character.stamina)")
         //print("\(mainItem.name, mainItem.category)")
         ad.saveContext()
+        
         completion(true)
         
     }
@@ -110,6 +141,40 @@ class CreateCharacterVC: UIViewController, UITextFieldDelegate {
             paycheckTxt.text = String(format: "%0.2f", text)
         } else {
             paycheckTxt.text = ""
+        }
+    }
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return characterClass.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        let choice = characterClass[row]
+        return choice
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if row > 0 {
+            let choice = characterClass[row]
+            selectedClass = choice
+            classNameButton.setTitle(choice, for: .normal)
+            classNameButton.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
+            
+            classPicker.isHidden = true
+        } else {
+            
+        }
+        
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if !classPicker.isHidden {
+            classPicker.isHidden = true
         }
     }
 

@@ -19,11 +19,14 @@ class EditTargetVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var targetNameTF: UITextField!
     @IBOutlet weak var actualTargetnameTF: UITextField!
     @IBOutlet weak var createButton: UIButton!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let closeTouch = UITapGestureRecognizer(target: self, action: #selector(EditTargetVC.closeTap(_:)))
+        view.addGestureRecognizer(closeTouch)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,10 +51,30 @@ class EditTargetVC: UIViewController, UITextFieldDelegate {
     func createButtonSetup() {
         if targetToEdit != nil {
             createButton.isHidden = true
+            title = "Edit"
         } else {
+            title = "Create Target"
             createButton.isHidden = false
         }
     }
+    
+    @IBAction func deleteTapped(_ sender: Any) {
+        let ac = UIAlertController(title: "Delete Targets", message: "Are you were sure you want to delete Target?", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "DELETE", style: .destructive, handler: { Void in
+            
+            if self.targetToEdit != nil {
+                context.delete(self.targetToEdit!)
+                ad.saveContext()
+            }
+            
+            self.navigationController?.popViewController(animated: true)
+        }))
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        ac.addAction(cancelAction)
+        self.present(ac, animated: true, completion: nil)
+    }
+    
     
     //can we save as soon as text is done editing?
     
@@ -105,7 +128,9 @@ class EditTargetVC: UIViewController, UITextFieldDelegate {
     }
     
     
-    
+    @objc func closeTap(_ recognizer: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
     
     
     

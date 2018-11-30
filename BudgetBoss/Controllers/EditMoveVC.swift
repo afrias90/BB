@@ -24,6 +24,7 @@ class EditMoveVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     @IBOutlet weak var moveCategoryTF: UITextField!
     @IBOutlet weak var addCategoryButton: UIButton!
     @IBOutlet weak var catPicker: UIPickerView!
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
     
     
     
@@ -34,11 +35,16 @@ class EditMoveVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
         catPicker.delegate = self
         catPicker.dataSource = self
         // Do any additional setup after loading the view.
+        let closeTouch = UITapGestureRecognizer(target: self, action: #selector(EditMoveVC.closeTap(_:)))
+        view.addGestureRecognizer(closeTouch)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         if moveToEdit != nil {
             setupMove()
+            title = "Edit"
+        } else {
+            title = "Create Move"
         }
         createMoveButtonSetup()
         fetchCatList()
@@ -100,6 +106,24 @@ class EditMoveVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
             createButton.isHidden = false
         }
     }
+    
+    @IBAction func deleteTapped(_ sender: Any) {
+        let ac = UIAlertController(title: "Delete Move", message: "Are you were sure you want to delete move?", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "DELETE", style: .destructive, handler: { Void in
+            
+            if self.moveToEdit != nil {
+                context.delete(self.moveToEdit!)
+                ad.saveContext()
+            }
+            
+            self.navigationController?.popViewController(animated: true)
+        }))
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        ac.addAction(cancelAction)
+        self.present(ac, animated: true, completion: nil)
+    }
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if moveCategoryTF.isFirstResponder {
@@ -215,7 +239,9 @@ class EditMoveVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, U
     }
     
     
-    
+    @objc func closeTap(_ recognizer: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
     
 
 }

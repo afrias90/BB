@@ -56,7 +56,7 @@ struct Settings {
     func registerDefaults() {
         //add any first time items here as well
         //date has to be initiated?
-        let dictionary: [String:Any] = ["FirstTime": true, "StartDate": Date(), "TotalStamina": 0.00, "AttackBudget": 0.00, "DefenseBudget": 0.00 ] as [String:Any]
+        let dictionary: [String:Any] = ["FirstTime": true, "PreloadedLists": false, "StartDate": Date(), "TotalStamina": 0.00, "AttackBudget": 0.00, "DefenseBudget": 0.00 ] as [String:Any]
         UserDefaults.standard.register(defaults: dictionary)
         
     }
@@ -70,19 +70,6 @@ struct Settings {
             userDefaults.set(false, forKey: "FirstTime")
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     

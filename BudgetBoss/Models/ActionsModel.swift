@@ -50,8 +50,10 @@ class ActionModel {
         log.itemName = equipment.name
         //targetNewPower, target is not item so nothing
         log.power = damage
+        log.itemNewPower = equipment.value
         log.targetName = target.name
         log.moveName = move.name
+        
         
         //logDetail/story
         var attackOrDefend = ""
@@ -63,20 +65,21 @@ class ActionModel {
         
         let tName = target.name ?? "tName"
         let mName = move.name ?? "mName"
-        let mActualName = move.actualName ?? "mActualName"
+        let mActualName = move.actualName ?? "actual name missing"
         let cName = character.name ?? "cName"
         let eName = equipment.name ?? "eName"
         ///determine boss status
         
-        log.detail = "\(tName) appeared. \(tName) uses \(mName) (\(mActualName)). \(cName) \(attackOrDefend) with \(eName) for \(damage) damage! Outcome: \(bd1). \(bd2)"
+        log.detail = "\(tName) appeared. \(bd1) \(tName) uses \(mName) (\(mActualName)). \(cName) \(attackOrDefend) with \(eName) for \(damage) damage! \(bd2)"
         
         return log
     }
     
-    func createLogForSmithAction(equipment: Item, secondary: Item, character: Character, damage: Double, action: String, bd1: String?, bd2: String?) -> Log {
+    func createLogForSmithAction(equipment: Item, secondary: Item, character: Character, damage: Double, newItem: Bool, action: String, bd1: String) -> Log {
         //budgetAction referse to Attack or Defend
         let log = Log(context: context)
         log.category = action
+        log.moveName = "Smithing"
         log.date = Date()
         log.expense = false
         log.itemName = equipment.name
@@ -89,10 +92,18 @@ class ActionModel {
         
         //logDetail/story
         
-        //let cName = character.name ?? "cName"
-        //let eName = equipment.name ?? "eName"
+        let cName = character.name ?? "cName"
+        let eName = equipment.name ?? "eName"
+        let tName = secondary.name ?? "secondary item"
+        var newOrOld = ""
+        if newItem {
+            newOrOld = "was created with"
+        } else {
+            newOrOld = "received"
+        }
         
-        log.detail = "Smith detail not done."
+        
+        log.detail = "\(cName) takes out \(eName). \(bd1) \(tName) \(newOrOld) \(damage) power!"
         
         return log
     }
@@ -100,6 +111,7 @@ class ActionModel {
     func createLogForCleanseAction(equipment: Item, secondary: Item, character: Character, damage: Double, action: String, bd1: String?, bd2: String?) -> Log {
         //budgetAction referse to Attack or Defend
         let log = Log(context: context)
+        log.moveName = "Cleansing"
         log.category = action
         log.date = Date()
         log.expense = false
@@ -124,6 +136,7 @@ class ActionModel {
         let log = Log(context: context)
         log.category = action
         log.date = Date()
+        log.moveName = "Sickness"
         //don't remember rule on this
         log.expense = false
         log.itemName = debt.name
@@ -139,6 +152,7 @@ class ActionModel {
     func createLogForEnergy(equipment: Item, source: Merchant, move: Move, damage: Double, action: String) -> Log {
         let log = Log(context: context)
         log.category = action
+        log.moveName = "Energize"
         log.date = Date()
         //don't remember rule on this
         log.expense = false
@@ -272,11 +286,14 @@ class ActionModel {
         do {
             let results = try context.fetch(Move.fetchRequest()) as [Move]
             if results.count > 0 {
+                print("moves were found andfetched")
                 return results
+                
             }
         } catch let error as NSError {
             print(error)
         }
+        print("no moves were found")
         return []
     }
     

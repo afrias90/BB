@@ -11,8 +11,6 @@ import CoreData
 
 class LogVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
-    
     @IBOutlet weak var logTableView: UITableView!
     
     var logBook: [Log] = []
@@ -54,6 +52,22 @@ class LogVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedLog = logBook[indexPath.row]
+        performSegue(withIdentifier: "receiptDetailSegue", sender: selectedLog)
+        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "receiptDetailSegue" {
+            if let destination = segue.destination as? ReceiptVC {
+                if let log = sender as? Log  {
+                    destination.receipt = log
+                    destination.receiptDetail = true
+                }
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 125
     }
@@ -69,6 +83,17 @@ class LogVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let log = logBook[indexPath.row]
+            context.delete(log)
+            logBook.remove(at: indexPath.row)
+            tableView.reloadData()
+            
+            ad.saveContext()
+        }
+        
+    }
 
     
 

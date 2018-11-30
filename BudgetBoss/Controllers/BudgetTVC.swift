@@ -19,12 +19,28 @@ class BudgetTVC: UITableViewController, BudgetXibDelegate {
     
     func budgetXibVC(_ controller: BudgetVC, didFinishEditing budget: Double, for Ability: String) {
         print("This is our returned set ability \(Ability)")
+        let stamina = UserDefaults.standard.double(forKey: "TotalStamina")
+        
         if Ability == "Attack" {
             let attack = "AttackBudget"
-            UserDefaults.standard.set(budget, forKey: attack)
+            let defense = UserDefaults.standard.double(forKey: "DefenseBudget")
+            
+            if budget <= (stamina + defense) {
+                UserDefaults.standard.set(budget, forKey: attack)
+            } else {
+                // warning: budget (attack and defense)  exceeds stamina. Could not set new attack budget
+            }
+            
         } else if Ability == "Defense" {
             let defense = "DefenseBudget"
-            UserDefaults.standard.set(budget, forKey: defense)
+            let attack = UserDefaults.standard.double(forKey: "AttackBudget")
+            
+            if budget <= (stamina + attack) {
+                UserDefaults.standard.set(budget, forKey: defense)
+            } else {
+                //warning: budget (attack and defense)  exceeds stamina. Could not set new denfese budget
+            }
+            
         }
         
         setupInfo()
@@ -39,13 +55,17 @@ class BudgetTVC: UITableViewController, BudgetXibDelegate {
     
     @IBOutlet weak var budgetAmount: UILabel!
     @IBOutlet weak var budgetProgressWidth: NSLayoutConstraint!
+    @IBOutlet weak var budgetViewSection0: UIView!
+    @IBOutlet weak var budgetImage: UIImageView!
+    @IBOutlet weak var budgetTitle: UILabel!
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if abilityTitle != nil {
-            title = abilityTitle!
+            budgetTitle.text = abilityTitle!
         }
 
        
@@ -86,12 +106,16 @@ class BudgetTVC: UITableViewController, BudgetXibDelegate {
         
         var ability = ""
         if abilityTitle == "Attack" {
+            budgetImage.image = UIImage(named: "Attack")
             ability = "AttackBudget"
             abilityInfo.text = attackInfo
+            budgetViewSection0.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 1)
             
         } else {
             ability = "DefenseBudget"
+            budgetImage.image = UIImage(named: "Defense")
             abilityInfo.text = defenseInfo
+            budgetViewSection0.backgroundColor = #colorLiteral(red: 0.107016407, green: 0.5467073917, blue: 1, alpha: 1)
         }
         
         abilityTotal = UserDefaults.standard.double(forKey: ability)
@@ -104,6 +128,16 @@ class BudgetTVC: UITableViewController, BudgetXibDelegate {
             let difference = abilityTotal! - abilityUsed!
             let left = String(format: "%0.2f", difference)
             budgetAmount.text = "\(left) / \(total)"
+            
+            //
+            let percentage = (abilityTotal! - abilityUsed!) / abilityTotal!
+            let abilityProgress = (percentage * 150)
+            
+            if abilityProgress.isNaN || abilityProgress < 0 {
+                budgetProgressWidth.constant = 0
+            } else {
+                budgetProgressWidth.constant = CGFloat(abilityProgress)
+            }
         }
         
     }

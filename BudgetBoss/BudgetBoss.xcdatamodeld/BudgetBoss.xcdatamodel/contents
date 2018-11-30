@@ -2,31 +2,34 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18B75" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Character" representedClassName="Character" syncable="YES" codeGenerationType="class">
         <attribute name="attack" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="category" optional="YES" attributeType="String" defaultValueString="Cursed Warrior" syncable="YES"/>
+        <attribute name="charClass" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="defense" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="progress" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="stamina" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="item" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Item" inverseName="toCharacter" inverseEntity="Item" syncable="YES"/>
         <relationship name="log" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Log" inverseName="toCharacter" inverseEntity="Log" syncable="YES"/>
     </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="actualName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="actualName" optional="YES" attributeType="String" defaultValueString="NA" syncable="YES"/>
         <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="debt" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="durability" optional="YES" attributeType="Double" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="debt" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="durability" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="main" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="originalVal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="toCharacter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Character" inverseName="item" inverseEntity="Character" syncable="YES"/>
     </entity>
     <entity name="Log" representedClassName="Log" syncable="YES" codeGenerationType="class">
         <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="current" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="expense" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="itemName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="itemNewPower" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="mathDetail" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="moveName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="power" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="targetName" optional="YES" attributeType="String" syncable="YES"/>
@@ -50,12 +53,27 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="move" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Move" inverseName="category" inverseEntity="Move" syncable="YES"/>
     </entity>
+    <entity name="Progress" representedClassName="Progress" syncable="YES" codeGenerationType="class">
+        <attribute name="attack" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="cleanse" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="defense" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="energy" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="period" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="points" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sickness" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="smith" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="stamina" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="totalAttack" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="totalDefense" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="totalStamina" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Character" positionX="2088" positionY="-1017" width="128" height="150"/>
-        <element name="Item" positionX="1890" positionY="-1026" width="128" height="165"/>
+        <element name="Character" positionX="2088" positionY="-1017" width="128" height="180"/>
+        <element name="Item" positionX="1890" positionY="-1026" width="128" height="180"/>
         <element name="Log" positionX="2286" positionY="-1008" width="128" height="225"/>
         <element name="Merchant" positionX="2097" positionY="-1161" width="128" height="118"/>
         <element name="Move" positionX="1912.8828125" positionY="-1159.66796875" width="128" height="105"/>
         <element name="ObjCategory" positionX="1740.015625" positionY="-1139.55859375" width="128" height="75"/>
+        <element name="Progress" positionX="1944" positionY="-1008" width="128" height="225"/>
     </elements>
 </model>

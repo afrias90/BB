@@ -46,13 +46,13 @@ class EditItem: UIViewController, UITextFieldDelegate, UINavigationControllerDel
     
     @IBOutlet weak var debtValueTxtField: UITextField!
     
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         statsViewWidth.constant = view.frame.width - 20
         
-        if itemToEdit != nil {
-            loadItem()
-        }
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(EditItem.handleTap))
         view.addGestureRecognizer(tap)
@@ -60,6 +60,11 @@ class EditItem: UIViewController, UITextFieldDelegate, UINavigationControllerDel
     }
     
     override func viewWillAppear(_ animated: Bool) {
+
+        deleteButton.isEnabled = false
+        if itemToEdit != nil {
+            loadItem()
+        }
         
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -123,12 +128,14 @@ class EditItem: UIViewController, UITextFieldDelegate, UINavigationControllerDel
                     } else {
                         item?.debt = false
                     }
+                    
                 } else {
                     print("error with creditValueTextField")
                 }
                 if durabilityTxtField.text != "" {
                     let durability = Double(durabilityTxtField.text!)!
                     item?.durability = durability
+                    item?.originalVal = durability
                 } else {
                     print("error with durability textfield")
                 }
@@ -136,6 +143,7 @@ class EditItem: UIViewController, UITextFieldDelegate, UINavigationControllerDel
                 if debtValueTxtField.text != "" {
                     let val = Double(debtValueTxtField.text!)!
                     item?.value = val
+                    item?.originalVal = val
                     if val > 0 {
                         item?.debt = true
                     } else {
@@ -157,9 +165,9 @@ class EditItem: UIViewController, UITextFieldDelegate, UINavigationControllerDel
         
     }
     
-    
-    
-    
+    @IBAction func deleteTapped(_ sender: Any) {
+        
+    }
     
     
     func resetPower() {
@@ -174,16 +182,24 @@ class EditItem: UIViewController, UITextFieldDelegate, UINavigationControllerDel
     
     func loadItem() {
         nameTxtField.text = itemToEdit?.name
+        
         realNameTxtField.text = itemToEdit?.actualName
         let category = itemToEdit?.category
         currentState(category: category!)
         
-        //if it is the main account, it cannot be changed from asset
         if (itemToEdit?.main)! {
+            deleteButton.isEnabled = false
+        } else {
+            deleteButton.isEnabled = true
+        }
+        
+        //if it is the main account, it cannot be changed from asset
+        //if (itemToEdit?.main)! {
+        //prohibit edited items from changing type
             powerBtn.isEnabled = false
             magicBtn.isEnabled = false
             afflictionBtn.isEnabled = false
-        }
+        //}
         
     }
     
@@ -209,13 +225,16 @@ class EditItem: UIViewController, UITextFieldDelegate, UINavigationControllerDel
         powerBtn.setImage(UIImage(named: "Power"), for: .normal)
         resetMagic()
         resetAffliction()
-        self.view.layoutIfNeeded()
         
+        
+      
+        self.view.layoutIfNeeded()
         UIView.animate(withDuration: 0.5, delay: 0.0, options: [.curveLinear], animations: {
             self.stackViewLeading.constant = 10
             
             self.view.layoutIfNeeded()
         }, completion: nil)
+        
     }
     
     func setupCredit() {
@@ -277,6 +296,12 @@ class EditItem: UIViewController, UITextFieldDelegate, UINavigationControllerDel
         view.endEditing(true)
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if assetValueTxtField.isFirstResponder {
+            assetValueTxtField.text = ""
+        }
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
         
         
@@ -303,9 +328,6 @@ class EditItem: UIViewController, UITextFieldDelegate, UINavigationControllerDel
         } else {
             assetValueTxtField.text = ""
         }
-        
-        
-        
         
     }
     

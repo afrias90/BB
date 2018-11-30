@@ -16,7 +16,7 @@ protocol StaminaXibVCDelegate: class {
 class StaminaVC: UIViewController {
     
     //not sure if this is enough to get the delegate to work...
-    var delegate: StaminaXibVCDelegate?
+    weak var delegate: StaminaXibVCDelegate?
     
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var textfield: UITextField!
